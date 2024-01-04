@@ -28,7 +28,7 @@ const Ship = function(length,sunk,hits) {
 
 const myShip  = new Ship(3, false ,0)
 const myShip2  = new Ship(2, false ,0)
-console.log(myShip);
+//console.log(myShip);
 // myShip.hit()
 // myShip.hit()
 // myShip.hit()
