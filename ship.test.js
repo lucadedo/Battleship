@@ -7,7 +7,15 @@ const testShip2  = new Ship(2, false ,0);
 test('SHIP PROP CHECK', () => {   
     expect(testShip.length).toEqual(3);
     expect(testShip.sunk).toBeFalsy();
-    expect(testShip.hits).toEqual(0)
+    expect(testShip.hits).toEqual(0);
+    expect(testShip).toMatchObject({
+          ength: 3,
+          sunk: false,
+          hits: 0,
+          hit: expect.any(Function),
+          isSunk: expect.any(Function)
+         }
+      );
 });
 
 test('SHIP HIT TEST', () => {
