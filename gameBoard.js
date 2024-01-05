@@ -9,13 +9,17 @@ const GameBoard = function() {
     const battleship4 = new Ship(4, false ,0);
     const cruiser3 = new Ship(3, false,0);
     const submarine3 = new Ship(3, false,0);
-    const destroyer2 =new Ship(2, false,0);
+    const destroyer2 = new Ship(2, false,0);
     
     let allShips = [carrier5,battleship4,cruiser3,submarine3,destroyer2];
     let targetShip = allShips[0];
     let shipDirectionHorizontal = true;
     let shipDirectionVertical = false;
 
+   
+    this.getAllShips = function () {
+        return allShips;
+    };
 
     this.chooseShip = function(num){
         targetShip = allShips[num];
@@ -97,7 +101,7 @@ const GameBoard = function() {
         if (board[x][y] !== null && board[x][y].hasOwnProperty('hits')) {
             board[x][y].hit();
             console.log(`hit! at (${x},${y})`);
-            //console.log(board)
+            
             this.allShipSunk(); //check if all ships sunk
         }else if(board[x][y] === null){
             let missed = {missedX:x,missedY:y};
@@ -110,7 +114,7 @@ const GameBoard = function() {
         
     };
     this.displayBoard = function() {
-        console.log(board);
+        //console.log(board);
         return board;
     };
 
@@ -118,9 +122,9 @@ const GameBoard = function() {
        let allTrue = allShips.every((obj) => obj.sunk === true); 
        if (allTrue) {
         console.log("game over");
+        return 'game over';
        }
-    };
-    
+    };  
 };
 
 
@@ -136,8 +140,7 @@ gameBoard.placeShip(1,0); //(1,0)(2,0)(3,0)(4,0)
 
 // gameBoard.receiveAttack(0,2);
 // gameBoard.receiveAttack(0,3);
-
-gameBoard.displayBoard()
+console.log(gameBoard.displayBoard());
 
 module.exports = GameBoard;
 
