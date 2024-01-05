@@ -1,14 +1,6 @@
 const Ship = require("./ship");
 
 
-
-
-// const createCordinate = function(x, y) {
-//         this.x = x,
-//         this.y = y
-// }
-
-
 const GameBoard = function() {
     
     const board = new Array(10).fill(null).map(() => Array(10).fill(null));// 2D board
@@ -20,13 +12,14 @@ const GameBoard = function() {
     const destroyer2 =new Ship(2, false,0);
     
     let allShips = [carrier5,battleship4,cruiser3,submarine3,destroyer2];
-    let targetShip;
+    let targetShip = allShips[0];
     let shipDirectionHorizontal = true;
     let shipDirectionVertical = false;
 
 
     this.chooseShip = function(num){
         targetShip = allShips[num];
+        return targetShip;
     };
     
     this.placeShip = function(x ,y) {
@@ -101,16 +94,16 @@ const GameBoard = function() {
 
 
     this.receiveAttack = function(x,y) {
-        if (board[x][y] !== null && board[x][y] == targetShip) {
+        if (board[x][y] !== null && board[x][y].hasOwnProperty('hits')) {
             board[x][y].hit();
             console.log(`hit! at (${x},${y})`);
-            console.log(board)
+            //console.log(board)
             this.allShipSunk(); //check if all ships sunk
         }else if(board[x][y] === null){
             let missed = {missedX:x,missedY:y};
             board[x][y] = missed;
             console.log(`you missed! at (${x},${y})`);
-            console.log(board)
+            return board;
         }else{
             throw new Error('point already hitted')
         }
@@ -118,6 +111,7 @@ const GameBoard = function() {
     };
     this.displayBoard = function() {
         console.log(board);
+        return board;
     };
 
     this.allShipSunk = function() {
@@ -129,6 +123,8 @@ const GameBoard = function() {
     
 };
 
+
+// testing...
 const gameBoard = new GameBoard();
 //start with horizontal direction X
 gameBoard.chooseShip(0); // size of 5
@@ -143,7 +139,7 @@ gameBoard.placeShip(1,0); //(1,0)(2,0)(3,0)(4,0)
 
 gameBoard.displayBoard()
 
-
+module.exports = GameBoard;
 
 
 
