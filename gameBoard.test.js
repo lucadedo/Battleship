@@ -36,9 +36,9 @@ test('PLACE SHIP', () => {
 });
 
 test('RECIEVE ATTACK', () => {
+  let testBoard2 = testgameBoard.displayBoard()
   testgameBoard.placeShip(0,0)
   testgameBoard.receiveAttack(0,0)
-  let testBoard2 = testgameBoard.displayBoard()
 
   expect(testBoard2[0][0]).not.toBeNull();
   expect(testgameBoard.chooseShip(0).hits).toBe(1);
@@ -54,3 +54,13 @@ test('RECIEVE ATTACK', () => {
   expect(testgameBoard.displayBoard()[6][5]).toEqual({missedX:6,missedY:5});// missed hits
 });
 
+test('ALL SHIP SUNK', () => {
+  const testBoard2 = new GameBoard();
+  testBoard2.chooseShip(4);
+  testBoard2.placeShip(0,0);
+  expect(testBoard2.displayBoard()[0][0]).not.toBeNull();
+  testBoard2.receiveAttack(0,0);
+  testBoard2.receiveAttack(1,4);
+  testBoard2.receiveAttack(1,0);
+  expect(testBoard2.displayBoard()[0][0].sunk).toBeTruthy();
+})
