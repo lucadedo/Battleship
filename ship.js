@@ -14,7 +14,6 @@ const Ship = function(length,sunk,hits) {
         return `"Ship hit! Total hits: "${this.hits}`;
     };
    };
-
    this.isSunk = function() {
         if (this.hits >= this.length) { 
             //console.log("Ship Sunk! Total hits: " + this.hits);
