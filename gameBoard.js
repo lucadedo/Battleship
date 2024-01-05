@@ -33,8 +33,8 @@ const GameBoard = function() {
 
         if (x >= 0 && x < 10 && y >= 0 && y < 10 ) {
 
-            if (shipDirectionHorizontal) {
-                if (this.validateThisPlace(x)) {
+            if (shipDirectionHorizontal) { 
+                if (this.checkIfPlaceOutside(x) && this.checkIfShipOnHorizontal(x,y)) { //check if horizontal is placeable && if there is ship around
                     for (let i = 0; i < targetShip.length; i++){
                         board[i + x][y] = targetShip; //place horizontal
                     };
@@ -43,7 +43,7 @@ const GameBoard = function() {
                 };
                 
             }else if (shipDirectionVertical) {
-                if (this.validateThisPlace(y)) {
+                if (this.checkIfPlaceOutside(y) && this.checkIfShipOnVertical(x,y)) {//check if vertical is placeable && if there is ship around
                     for (let i = 0; i < targetShip.length; i++){
                         board[x][i + y] = targetShip; //place vertical
                     };
@@ -58,22 +58,36 @@ const GameBoard = function() {
         };
     };
 
-    this.validateThisPlace = function(xy) { //check x or y ,depend on what it takes ,is the same
+    this.checkIfPlaceOutside = function(xy) { //check x or y ,depends on what it takes ,is the same
         if ((targetShip.length > 4 && xy >= 6) ||
             (targetShip.length > 3 && xy >= 7) ||
             (targetShip.length > 2 && xy >= 8) ||
             (targetShip.length == 2 && xy == 9)) {
                 console.log('validate error,cant palce here 1');
-                return false
+                return false;
             }else{
-                return true
+                return true;
             };
-
-
     };
 
-
-
+    this.checkIfShipOnHorizontal = function(x,y) {
+        for (let i = 0; i < targetShip.length; i++){
+            if (board[x + i][y] !== null) {
+                console.log('ships on Horizontal, cant place here!');
+                return false;
+            };
+        };
+        return true;
+    };
+    this.checkIfShipOnVertical = function(x,y) {
+        for (let i = 0; i < targetShip.length; i++){
+            if (board[x][y + i] !== null) {
+                console.log('ships on Vertical, cant place here!');
+                return false;
+            };
+        };
+        return true;
+    };
 
     this.changeShipDirection = function(){
         if (shipDirectionHorizontal === true) {
@@ -116,9 +130,13 @@ const GameBoard = function() {
 };
 
 const gameBoard = new GameBoard();
-gameBoard.chooseShip(0);
+//start with horizontal direction X
+gameBoard.chooseShip(0); // size of 5
+gameBoard.changeShipDirection(); // switch to vertical dir Y
+gameBoard.placeShip(0,0); // (0,0)(0,1)(0,2)(0,3)(0,4)
+gameBoard.chooseShip(1);//size of 4
 gameBoard.changeShipDirection();
-gameBoard.placeShip(2,6);
+gameBoard.placeShip(1,0); //(1,0)(2,0)(3,0)(4,0)
 
 // gameBoard.receiveAttack(0,2);
 // gameBoard.receiveAttack(0,3);
