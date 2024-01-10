@@ -10,14 +10,11 @@ const Player = function(name, turn) {
     };
 
     this.attack = function(x, y) {
-        console.log(x,y);
-        this.switchTurn();
-        return x,y;
+        return [x, y];
     };
 
 };
-const luca = new Player('luca',true);
-const PC = new Player('captain PC', false);
+
 
 
 //luca.switchTurn()

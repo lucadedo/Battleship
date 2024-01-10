@@ -122,22 +122,22 @@ const GameBoard = function() {
        if (allTrue) {
         console.log("game over");
         return 'game over';
-       }
+       };
     };  
 };
 
 
 // testing...
-//const gameBoard = new GameBoard();
+const gameBoard = new GameBoard();
 //start with horizontal direction X
-// gameBoard.chooseShip(0); // size of 5
-// gameBoard.changeShipDirection(); // switch to vertical dir Y
-// gameBoard.placeShip(0,0); // (0,0)(0,1)(0,2)(0,3)(0,4)
+gameBoard.chooseShip(0); // size of 5
+gameBoard.changeShipDirection(); // switch to vertical dir Y
+ gameBoard.placeShip(0,0); // (0,0)(0,1)(0,2)(0,3)(0,4)
 // gameBoard.chooseShip(1);//size of 4
 // gameBoard.changeShipDirection();
 // gameBoard.placeShip(1,0); //(1,0)(2,0)(3,0)(4,0)
 
-// gameBoard.receiveAttack(0,2);
+gameBoard.receiveAttack(0,2);
 // gameBoard.receiveAttack(0,3);
 //console.log(gameBoard.displayBoard());
 
