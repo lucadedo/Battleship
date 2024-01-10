@@ -39,7 +39,6 @@ test('RECIEVE ATTACK', () => {
   let testBoard2 = testgameBoard.displayBoard()
   testgameBoard.placeShip(0,0)
   testgameBoard.receiveAttack(0,0)
-
   expect(testBoard2[0][0]).not.toBeNull();
   expect(testgameBoard.chooseShip(0).hits).toBe(1);
   testgameBoard.receiveAttack(1,0);

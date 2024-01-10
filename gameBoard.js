@@ -29,7 +29,6 @@ const GameBoard = function() {
     this.placeShip = function(x ,y) {
 
         if (x >= 0 && x < 10 && y >= 0 && y < 10 ) {
-
             if (shipDirectionHorizontal) { 
                 if (this.checkIfPlaceOutside(x) && this.checkIfShipOnHorizontal(x,y)) { //check if horizontal is placeable && if there is ship around
                     for (let i = 0; i < targetShip.length; i++){
@@ -114,7 +113,7 @@ const GameBoard = function() {
         
     };
     this.displayBoard = function() {
-        //console.log(board);
+        console.log(board);
         return board;
     };
 
@@ -129,18 +128,18 @@ const GameBoard = function() {
 
 
 // testing...
-const gameBoard = new GameBoard();
+//const gameBoard = new GameBoard();
 //start with horizontal direction X
-gameBoard.chooseShip(0); // size of 5
-gameBoard.changeShipDirection(); // switch to vertical dir Y
-gameBoard.placeShip(0,0); // (0,0)(0,1)(0,2)(0,3)(0,4)
-gameBoard.chooseShip(1);//size of 4
-gameBoard.changeShipDirection();
-gameBoard.placeShip(1,0); //(1,0)(2,0)(3,0)(4,0)
+// gameBoard.chooseShip(0); // size of 5
+// gameBoard.changeShipDirection(); // switch to vertical dir Y
+// gameBoard.placeShip(0,0); // (0,0)(0,1)(0,2)(0,3)(0,4)
+// gameBoard.chooseShip(1);//size of 4
+// gameBoard.changeShipDirection();
+// gameBoard.placeShip(1,0); //(1,0)(2,0)(3,0)(4,0)
 
 // gameBoard.receiveAttack(0,2);
 // gameBoard.receiveAttack(0,3);
-console.log(gameBoard.displayBoard());
+//console.log(gameBoard.displayBoard());
 
 module.exports = GameBoard;
 
