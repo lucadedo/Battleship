@@ -12,7 +12,7 @@ const Player = function(name, turn) {
     this.attack = function(x, y) {
         return [x, y];
     };
-
+    
 };
 
 
