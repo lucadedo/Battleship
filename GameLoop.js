@@ -11,6 +11,9 @@ const enemyGameBoard = new GameBoard();
 function startGame() { 
         buildPlayerboardTest();
         buildBoardPC();
+
+        
+
         while(!enemyGameBoard.allShipSunk() || !playerGameBoard.allShipSunk()){
             if (luca.turn) {
                 let att = luca.attack(1,1)
