@@ -24,17 +24,20 @@ body {
     display: grid;
     justify-content: center;
     grid-column: 2;
+    padding-bottom: 8px;
 }
-
 #title-text {
     color :blue;
-    font-size: 5em;
+    font-size: 6em;
 }
 #start-up-bar {
     display: grid;
+    justify-content: center;
     grid-column: 2;
 }
 #start-btn {
+   min-width: 30em;
+    max-width: 30em;
     cursor: pointer;
     background-color: rgb(213, 36, 36);
     font-family: 'Lilita One','Roboto',sans-serif;
@@ -45,4 +48,4 @@ body {
 #start-btn:hover:not(:disabled) {
     filter: brightness(1.1);
     -webkit-filter: brightness(1.1);
-  }
+}
