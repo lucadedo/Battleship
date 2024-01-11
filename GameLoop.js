@@ -9,10 +9,9 @@ const enemyGameBoard = new GameBoard();
 
 
 function startGame() { 
+       
         buildPlayerboardTest();
         buildBoardPC();
-
-        
 
         while(!enemyGameBoard.allShipSunk() || !playerGameBoard.allShipSunk()){
             if (luca.turn) {
@@ -20,11 +19,13 @@ function startGame() {
                 enemyGameBoard.receiveAttack(att[0],att[1]);
                 luca.switchTurn();
                 PC.switchTurn();
+                console.log('LUCA ATTACKED');
             }else if (PC.turn) {
                 let att2 = PC.attack(2,3)
                 playerGameBoard.receiveAttack(att2[0],att2[1]);
                 PC.switchTurn();
                 luca.switchTurn();
+                console.log('PC ATTACKED');
             }else{
                 throw new Error('something went wrong')
             };
