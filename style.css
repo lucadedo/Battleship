@@ -1,12 +1,9 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
-
 * {
     margin: 0;
     padding: 0;
     border: 0;
 }
-
 body {
     font-family: 'Lilita One','Roboto',sans-serif;
     background-image: url("./img/ship-background.png");
@@ -37,7 +34,7 @@ body {
     grid-column: 2;
 }
 #start-btn {
-   min-width: 30em;
+    min-width: 30em;
     max-width: 30em;
     cursor: pointer;
     background-color: rgb(213, 36, 36);
@@ -49,4 +46,43 @@ body {
 #start-btn:hover:not(:disabled) {
     filter: brightness(1.1);
     -webkit-filter: brightness(1.1);
+}
+
+/* game Board section */
+#gameBoard-sec {
+    display: grid;
+    grid-template-rows: 2fr 8fr;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+#gameBoard-div {
+    display: flex;
+    justify-self: center;
+    justify-content: center;
+    grid-column: 2;
+    grid-row: 2;    
+    gap: 5px;
+    padding: 15px;
+    border-radius: 3em;
+    min-width: 40em;
+    max-width: 60em;
+    background-color: rgb(32, 127, 235,0.6);
+}
+.x {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   width: 50px;
+   gap: 5px;
+}
+.y {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: #fff;
+    width: 50px;
+    height: 50px;
+    border-radius: 16px;
+    
 }
