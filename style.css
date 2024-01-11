@@ -10,7 +10,8 @@ body {
     font-family: 'Lilita One','Roboto',sans-serif;
     background-image: url("./img/ship-background.png");
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size:contain;
+    background-position: center;
 }
 
 /* top section */
@@ -115,19 +116,28 @@ body {
     background-color: blueviolet;    
     border-radius: 16px;
     box-shadow: 1px 1px 5px 0px black;
+    margin-top: -90px;
 }
 #your-name-txt {
     font-size: 2.5em;
     color: #daaa0e;
     text-shadow: 1px 1px #000000;
 }
+#form-name{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
 #input-name {
     font-family: 'Lilita One','Roboto',sans-serif;
     font-size: 50px;
     height: 50px;
     padding: 8px;
-    border-radius: 10px;
+    border-radius: 10px;    
     text-align: center;
+    
 }
 #submit-name-btn {
     background-color: rgb(213, 36, 36);
@@ -137,12 +147,12 @@ body {
     font-family: 'Lilita One','Roboto',sans-serif;
     font-size: 30px;
     border-radius: 16px;
+    width: 6em;
 }
 #submit-name-btn:hover:not(:disabled) {
     filter: brightness(1.1);
     -webkit-filter: brightness(1.1);
 }
-
 
 /* game Board section */
 #gameBoard-sec {
@@ -183,5 +193,7 @@ body {
     width: 50px;
     height: 50px;
     border-radius: 16px;
-    
+
 }
+
+
