@@ -1,4 +1,5 @@
 import { Player } from './Player.js';
+import { GameLoop } from './GameLoop.js';
 
 const startButton = document.querySelector("#start-btn");
 startButton.addEventListener('click',() =>{
@@ -31,21 +32,30 @@ startButton.addEventListener('click',() =>{
 
     formName.addEventListener('submit',(e) => {
         e.preventDefault();
-        const luca = new Player(inputName.value,true);
-        console.log(luca);
+        const newPlayer = new Player(inputName.value,true);
+        console.log(newPlayer);
         popUpdiv.remove();
         gameBoardSection.style.gridTemplateRows = '8fr';
         const PrintOutPlace = document.getElementById('start-up-bar');
         const PrintOutText = document.createElement('p');
         PrintOutText.setAttribute('id','print-out-text')
-        PrintOutText.innerText = `It's your turn! Captain ${luca.name}.`;
+        PrintOutText.innerText = `It's your turn! Captain ${newPlayer.name}.`;
         PrintOutPlace.appendChild(PrintOutText);
-     });
+        renderBoard(newPlayer);
+    });
+
 });
 
+function renderBoard(newPlayer) {
+    const newRound = new GameLoop(newPlayer);
+    // const playerGameBoard = newRound.renderPlayerBoard();
+    newRound.buildPlayerboardTest()
+    console.log(newRound);
+}
 
 
-//create the pop up form 
+
+
 
    
 
