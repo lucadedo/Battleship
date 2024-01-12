@@ -1,28 +1,30 @@
 import { GameBoard } from './gameBoard.js';
 import { Player } from './Player.js';
 
-const luca = new Player('luca',true);
-const PC = new Player('captain PC', false);
-
-const playerGameBoard = new GameBoard();
-const enemyGameBoard = new GameBoard();
 
 
-const GameLoop = function() { 
-       
+const GameLoop = function(player) { 
+    
+    console.log(player);
+    const PC = new Player('captain PC', false);
+    
+    const playerGameBoard = new GameBoard();
+    const enemyGameBoard = new GameBoard();
+
+
     this.startTurn = function () {
         while(!enemyGameBoard.allShipSunk() || !playerGameBoard.allShipSunk()){
-            if (luca.turn) {
+            if (player.turn) {
                 let att = luca.attack(1,1)
                 enemyGameBoard.receiveAttack(att[0],att[1]);
-                luca.switchTurn();
+                player.switchTurn();
                 PC.switchTurn();
                 console.log('LUCA ATTACKED');
             }else if (PC.turn) {
                 let att2 = PC.attack(2,3)
                 playerGameBoard.receiveAttack(att2[0],att2[1]);
                 PC.switchTurn();
-                luca.switchTurn();
+                player.switchTurn();
                 console.log('PC ATTACKED');
             }else{
                 throw new Error('something went wrong')
@@ -71,6 +73,10 @@ const GameLoop = function() {
 
     
     };
+    this.renderPlayerBoard = function () {
+       
+        return playerGameBoard;
+    }
 
 };
 
