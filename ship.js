@@ -35,10 +35,4 @@ myShip2.hit()
 myShip2.hit()
 myShip2.isSunk()
 
-
-
-
-
-
-
-module.exports = Ship;
+export { Ship };
