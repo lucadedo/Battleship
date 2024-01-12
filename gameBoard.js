@@ -1,4 +1,4 @@
-const Ship = require("./ship");
+import { Ship } from './ship.js';
 
 
 const GameBoard = function() {
@@ -141,7 +141,7 @@ gameBoard.receiveAttack(0,2);
 // gameBoard.receiveAttack(0,3);
 //console.log(gameBoard.displayBoard());
 
-module.exports = GameBoard;
+export { GameBoard };
 
 
 
