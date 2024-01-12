@@ -1,18 +1,10 @@
-
-import { createRequire } from "module";
-const require = createRequire(import.meta.url);
-const startGame = require('/GameLoop');
-
+import { Player } from './Player.js';
 
 const startButton = document.querySelector("#start-btn");
-startButton.addEventListener('click',() =>{createPopUp()});
-const gameBoardSection = document.querySelector('#gameBoard-sec')
-
-
-//create the pop up form 
-function createPopUp() {
+startButton.addEventListener('click',() =>{
     startButton.setAttribute("hidden",'true');
-    
+    const gameBoardSection = document.querySelector('#gameBoard-sec')
+
     const popUpdiv = document.createElement('div');
     const h1YourNameTxt = document.createElement('h1');
     const formName = document.createElement('form');
@@ -36,8 +28,17 @@ function createPopUp() {
     popUpdiv.appendChild(formName);
     gameBoardSection.appendChild(popUpdiv);// append to gameBoard section
 
-    letsgoButton.addEventListener('click',() =>{
-        startGame();
-    });
+    formName.addEventListener('submit',(e) => {
+        e.preventDefault();
+        const luca = new Player(inputName.value,true);
+        console.log(luca);
+        popUpdiv.remove();
+     });
+});
 
-}
+
+
+//create the pop up form 
+
+   
+
