@@ -2,7 +2,8 @@ import { Player } from './Player.js';
 
 const startButton = document.querySelector("#start-btn");
 startButton.addEventListener('click',() =>{
-    startButton.setAttribute("hidden",'true');
+    startButton.remove();
+    //startButton.setAttribute("hidden",'true');
     const gameBoardSection = document.querySelector('#gameBoard-sec')
 
     const popUpdiv = document.createElement('div');
@@ -33,6 +34,12 @@ startButton.addEventListener('click',() =>{
         const luca = new Player(inputName.value,true);
         console.log(luca);
         popUpdiv.remove();
+        gameBoardSection.style.gridTemplateRows = '8fr';
+        const PrintOutPlace = document.getElementById('start-up-bar');
+        const PrintOutText = document.createElement('p');
+        PrintOutText.setAttribute('id','print-out-text')
+        PrintOutText.innerText = `It's your turn! Captain ${luca.name}.`;
+        PrintOutPlace.appendChild(PrintOutText);
      });
 });
 
