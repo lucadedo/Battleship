@@ -15,10 +15,4 @@ const Player = function(name, turn) {
     
 };
 
-
-
-//luca.switchTurn()
-// luca.attack(1,2);
-// console.log(luca);
-
-module.exports = Player;
+export { Player };
