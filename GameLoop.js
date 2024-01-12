@@ -1,5 +1,5 @@
-const GameBoard = require("./gameBoard");
-const Player = require("./Player");
+import { GameBoard } from './gameBoard.js';
+import { Player } from './Player.js';
 
 const luca = new Player('luca',true);
 const PC = new Player('captain PC', false);
@@ -8,11 +8,9 @@ const playerGameBoard = new GameBoard();
 const enemyGameBoard = new GameBoard();
 
 
-function startGame() { 
+const GameLoop = function() { 
        
-        buildPlayerboardTest();
-        buildBoardPC();
-
+    this.startTurn = function () {
         while(!enemyGameBoard.allShipSunk() || !playerGameBoard.allShipSunk()){
             if (luca.turn) {
                 let att = luca.attack(1,1)
@@ -29,17 +27,12 @@ function startGame() {
             }else{
                 throw new Error('something went wrong')
             };
-           
-           
-        };
-
+        }; 
         console.log('STOP');
-};
+    };
 
 
-
-
-function buildPlayerboardTest() {
+    this.buildPlayerboardTest = function () {
        //horizontal
        playerGameBoard.chooseShip(0);
        playerGameBoard.placeShip(0,0);
@@ -56,30 +49,30 @@ function buildPlayerboardTest() {
        console.log('PLAYER BOARD:');                         
        playerGameBoard.displayBoard();
    
-};
+    };
 
 
-function buildBoardPC() {
-    //horizontal
-    enemyGameBoard.chooseShip(0);
-    enemyGameBoard.placeShip(1,1);
-    enemyGameBoard.chooseShip(1);
-    enemyGameBoard.placeShip(4,3);
-    enemyGameBoard.chooseShip(2);
-    enemyGameBoard.placeShip(6,5);
-    //vertical
-    enemyGameBoard.chooseShip(3);
-    enemyGameBoard.changeShipDirection()
-    enemyGameBoard.placeShip(1,4);
-    enemyGameBoard.chooseShip(4);
-    enemyGameBoard.placeShip(3,7);
-    console.log('PC BOARD:');
-    enemyGameBoard.displayBoard();
+    this.buildBoardPC = function () {
+        //horizontal
+        enemyGameBoard.chooseShip(0);
+        enemyGameBoard.placeShip(1,1);
+        enemyGameBoard.chooseShip(1);
+        enemyGameBoard.placeShip(4,3);
+        enemyGameBoard.chooseShip(2);
+        enemyGameBoard.placeShip(6,5);
+        //vertical
+        enemyGameBoard.chooseShip(3);
+        enemyGameBoard.changeShipDirection()
+        enemyGameBoard.placeShip(1,4);
+        enemyGameBoard.chooseShip(4);
+        enemyGameBoard.placeShip(3,7);
+        console.log('PC BOARD:');
+        enemyGameBoard.displayBoard();
 
     
+    };
+
 };
 
-
-startGame()
-
+export { GameLoop };
 
