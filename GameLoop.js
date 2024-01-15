@@ -50,7 +50,7 @@ const GameLoop = function(player) {
        playerGameBoard.placeShip(5,7);
        console.log('PLAYER BOARD:');                         
        playerGameBoard.displayBoard();
-   
+     
     };
 
 
@@ -74,8 +74,7 @@ const GameLoop = function(player) {
     
     };
     this.renderPlayerBoard = function () {
-       
-        return playerGameBoard;
+        return playerGameBoard.displayBoard();
     }
 
 };
