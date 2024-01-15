@@ -48,9 +48,30 @@ startButton.addEventListener('click',() =>{
 
 function renderBoard(newPlayer) {
     const newRound = new GameLoop(newPlayer);
-    // const playerGameBoard = newRound.renderPlayerBoard();
-    newRound.buildPlayerboardTest()
-    console.log(newRound);
+    const playerGameBoard = newRound.renderPlayerBoard();
+    newRound.buildPlayerboardTest();
+    
+    console.log(playerGameBoard);
+    const gameBoardDiv = document.getElementById("gameBoard-div");
+    var rows = 10;
+    var columns = 10;
+    for (var i = 0; i < rows; i++) {
+        // Create a new row (x)
+        var rowDiv = document.createElement("div");
+        rowDiv.className = "x";
+
+        for (var j = 0; j < columns; j++) {
+            // Create a new cell (y)
+            var cellDiv = document.createElement("div");
+            cellDiv.className = "y";
+        
+            // Append the cell to the row
+            rowDiv.appendChild(cellDiv);
+        }
+
+        // Append the row to the game board
+        gameBoardDiv.appendChild(rowDiv);
+    }
 }
 
 
