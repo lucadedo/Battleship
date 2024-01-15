@@ -51,27 +51,32 @@ function renderBoard(newPlayer) {
     const playerGameBoard = newRound.renderPlayerBoard();
     newRound.buildPlayerboardTest();
     
-    console.log(playerGameBoard);
+    console.log(playerGameBoard[0]);
+
+
     const gameBoardDiv = document.getElementById("gameBoard-div");
-    var rows = 10;
-    var columns = 10;
-    for (var i = 0; i < rows; i++) {
-        // Create a new row (x)
-        var rowDiv = document.createElement("div");
-        rowDiv.className = "x";
 
-        for (var j = 0; j < columns; j++) {
-            // Create a new cell (y)
-            var cellDiv = document.createElement("div");
-            cellDiv.className = "y";
-        
-            // Append the cell to the row
-            rowDiv.appendChild(cellDiv);
-        }
+    // playerGameBoard.forEach(function (row, rowIndex) {
+    //     // Create a new row
+    //     var rowDiv = document.createElement("div");
+    //     rowDiv.className = "x";
 
-        // Append the row to the game board
-        gameBoardDiv.appendChild(rowDiv);
-    }
+    //     row.forEach(function (cellData, columnIndex) {
+    //         // Create a new cell
+    //         var cellDiv = document.createElement("div");
+    //         cellDiv.className = "y";
+
+    //         // Check if the cell has a ship
+    //         if (cellData === "Ship") {
+    //             cell.classList.add("ship");
+    //         }
+
+    //         rowDiv.appendChild(cellDiv);
+    //     });
+    //     gameBoardDiv.appendChild(rowDiv);
+    // });
+
+
 }
 
 
