@@ -113,7 +113,6 @@ const GameBoard = function() {
         
     };
     this.displayBoard = function() {
-        console.log(board);
         return board;
     };
 
