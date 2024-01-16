@@ -198,6 +198,9 @@ body {
 .y:hover{
     background-color: #9f332b;
 }
+.ship {
+    background-color: #daaa0e;
+}
 /* print out text */
 
 #print-out-text  {
