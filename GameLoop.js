@@ -6,11 +6,8 @@ import { Player } from './Player.js';
 const GameLoop = function(player) { 
     
     console.log(player);
-    const PC = new Player('captain PC', false);
     
     const playerGameBoard = new GameBoard();
-    const enemyGameBoard = new GameBoard();
-
 
     this.startTurn = function () {
         while(!enemyGameBoard.allShipSunk() || !playerGameBoard.allShipSunk()){
@@ -56,20 +53,20 @@ const GameLoop = function(player) {
 
     this.buildBoardPC = function () {
         //horizontal
-        enemyGameBoard.chooseShip(0);
-        enemyGameBoard.placeShip(1,1);
-        enemyGameBoard.chooseShip(1);
-        enemyGameBoard.placeShip(4,3);
-        enemyGameBoard.chooseShip(2);
-        enemyGameBoard.placeShip(6,5);
+        playerGameBoard.chooseShip(0);
+        playerGameBoard.placeShip(1,1);
+        playerGameBoard.chooseShip(1);
+        playerGameBoard.placeShip(4,3);
+        playerGameBoard.chooseShip(2);
+        playerGameBoard.placeShip(6,5);
         //vertical
-        enemyGameBoard.chooseShip(3);
-        enemyGameBoard.changeShipDirection()
-        enemyGameBoard.placeShip(1,4);
-        enemyGameBoard.chooseShip(4);
-        enemyGameBoard.placeShip(3,7);
+        playerGameBoard.chooseShip(3);
+        playerGameBoard.changeShipDirection()
+        playerGameBoard.placeShip(1,4);
+        playerGameBoard.chooseShip(4);
+        playerGameBoard.placeShip(3,7);
         console.log('PC BOARD:');
-        enemyGameBoard.displayBoard();
+        playerGameBoard.displayBoard();
 
     
     };
