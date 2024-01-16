@@ -49,7 +49,9 @@ startButton.addEventListener('click',() =>{
 
         function renderBoard(newPlayer) {
 
-            const gameBoardDiv = document.getElementById("gameBoard-div");
+            const enemygameBoardDiv = document.getElementById("enemygameBoard-div");
+            const playergameBoardDiv = document.getElementById("playergameBoard-div");
+
 
             if (newPlayer.name === 'captain PC') {//pc board
                 const newRound = new GameLoop(newPlayer);
@@ -81,12 +83,12 @@ startButton.addEventListener('click',() =>{
     
            });
           
-            gameBoardDiv.appendChild(rowDiv)
+           enemygameBoardDiv.appendChild(rowDiv)
             
         });
         
         console.log(playerGameBoard);
-            };
+        };
         
 
     });
