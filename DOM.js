@@ -42,70 +42,61 @@ startButton.addEventListener('click',() =>{
         PrintOutText.innerText = `It's your turn! Captain ${newPlayer.name}.`;
         PrintOutPlace.appendChild(PrintOutText);
         renderBoard(newPlayer);
-    });
 
+        //create PC player
+        const PC = new Player('captain PC', false);
+        renderBoard(PC)
+
+        function renderBoard(newPlayer) {
+
+            const gameBoardDiv = document.getElementById("gameBoard-div");
+
+            if (newPlayer.name === 'captain PC') {//pc board
+                const newRound = new GameLoop(newPlayer);
+                var playerGameBoard = newRound.renderPlayerBoard();
+                newRound.buildBoardPC();
+                
+            }else{
+                const newRound = new GameLoop(newPlayer);//player board
+                var playerGameBoard = newRound.renderPlayerBoard();
+                newRound.buildPlayerboardTest();
+            };
+            
+
+        playerGameBoard.forEach((row,rowIndex) => {
+    
+            const rowDiv = document.createElement('div');
+            rowDiv.className = "x";
+            rowDiv.id = "x" + rowIndex;
+    
+            row.forEach((cell, cellIndex) => {
+            
+            const cellDiv = document.createElement('div');
+            cellDiv.className = "y";
+            cellDiv.id = "y" + cellIndex;
+            if (cell !== null) {
+                cellDiv.classList.add("ship");
+            };
+            rowDiv.appendChild(cellDiv);
+    
+           });
+          
+            gameBoardDiv.appendChild(rowDiv)
+            
+        });
+        
+        console.log(playerGameBoard);
+            };
+        
+
+    });
 });
 
-function renderBoard(newPlayer) {
-    const newRound = new GameLoop(newPlayer);
-    const playerGameBoard = newRound.renderPlayerBoard();
-    newRound.buildPlayerboardTest();
-    
-    console.log(playerGameBoard);
 
 
-    const gameBoardDiv = document.getElementById("gameBoard-div");
-    
-    playerGameBoard.forEach((row,rowIndex) => {
-
-        const rowDiv = document.createElement('div');
-        rowDiv.className = "x";
-        rowDiv.id = "x" + rowIndex;
-
-       row.forEach((cell, cellIndex) => {
-        
-        //console.log(cell);
-        
-        const cellDiv = document.createElement('div');
-        cellDiv.className = "y";
-        cellDiv.id = "y" + cellIndex;
-        if (cell !== null) {
-            cellDiv.classList.add("ship");
-        }
-        rowDiv.appendChild(cellDiv);
-        //console.log(row[cellIndex]);
-
-        
-       
-       })
-      
-        gameBoardDiv.appendChild(rowDiv)
-        
-    })
 
 
-    // playerGameBoard.forEach(function (row, rowIndex) {
-    //     // Create a new row
-    //     var rowDiv = document.createElement("div");
-    //     rowDiv.className = "x";
 
-    //     row.forEach(function (cellData, columnIndex) {
-    //         // Create a new cell
-    //         var cellDiv = document.createElement("div");
-    //         cellDiv.className = "y";
-
-    //         // Check if the cell has a ship
-            // if (cellData === "Ship") {
-            //     cell.classList.add("ship");
-            // }
-
-    //         rowDiv.appendChild(cellDiv);
-    //     });
-    //     gameBoardDiv.appendChild(rowDiv);
-    // });
-
-
-}
 
 
 
