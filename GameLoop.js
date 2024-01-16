@@ -77,4 +77,3 @@ const GameLoop = function(player) {
 };
 
 export { GameLoop };
-
