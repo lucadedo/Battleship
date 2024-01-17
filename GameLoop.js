@@ -28,21 +28,46 @@ const GameLoop = function(player,PC) {
     };
 
     this.shipsDeploy = function (board) {
-        //horizontal
-        board.chooseShip(0);
-        board.placeShip(0,0);
-        board.chooseShip(1);
-        board.placeShip(2,2);
-        board.chooseShip(2);
-        board.placeShip(7,4);
-        //vertical
-        board.chooseShip(3);
-        board.changeShipDirection()
-        board.placeShip(2,5);
-        board.chooseShip(4);
-        board.placeShip(5,7);
-        console.log(board);
+
+        let ships = ['Carrier','Battleship','Cruiser','Submarine','Destroyer'];  
+        for (let i = 0; i < ships.length; i++){
+            let isValidInput = false;
+            let shipCoordinates;
+            board.chooseShip(i)
+            // while (!isValidInput) {
+            //     shipCoordinates = prompt(`Place your ${ships[i]} (Enter coordinates in the format x,y)`);
+    
+            //     if (/^\d,\d$/.test(shipCoordinates)) {
+            //         isValidInput = true;
+            //     } else {
+            //         alert('Please enter coordinates in the correct format (e.g., 0,0).');
+            //     };
+            // };
+            //     let [x, y] = shipCoordinates.split(',').map(coord => parseInt(coord));
+            //     board.placeShip(x,y);
+            //     console.log(`Placed ${ships[i]} at coordinates (${x}, ${y})`);
+        };
+        
+       
+        // //horizontal
+        // board.chooseShip(0);
+        // board.placeShip(0,0);
+        // board.chooseShip(1)
+        // board.placeShip(2,2);
+        // board.chooseShip(2);
+        // board.placeShip(7,4);
+        // //vertical
+        // board.chooseShip(3);
+        // board.changeShipDirection()
+        // board.placeShip(2,5);
+        // board.chooseShip(4);
+        // board.placeShip(5,7);
+        // console.log(board);
+    
     };
+
+
+
 
     this.buildPlayerboard = function () {
         
