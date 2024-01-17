@@ -32,8 +32,10 @@ startButton.addEventListener('click',() =>{
 
     formName.addEventListener('submit',(e) => {
         e.preventDefault();
-        const newPlayer = new Player(inputName.value,true);
-        console.log(newPlayer);
+        
+        const newPlayer = new Player(inputName.value,true);// create Player
+        const PC = new Player('captain PC', false);//create PC 
+
         popUpdiv.remove();
         gameBoardSection.style.gridTemplateRows = '8fr';
         const PrintOutPlace = document.getElementById('start-up-bar');
@@ -41,52 +43,13 @@ startButton.addEventListener('click',() =>{
         PrintOutText.setAttribute('id','print-out-text')
         PrintOutText.innerText = `It's your turn! Captain ${newPlayer.name}.`;
         PrintOutPlace.appendChild(PrintOutText);
-        renderBoard(newPlayer);
 
-        //create PC player
-        const PC = new Player('captain PC', false);
-        renderBoard(PC)
 
-        function renderBoard(newPlayer) {
-
-            const enemygameBoardDiv = document.getElementById("enemygameBoard-div");
-            const playergameBoardDiv = document.getElementById("playergameBoard-div");
-
-            const newRound = new GameLoop(newPlayer);
-            var playerGameBoard = newPlayer.name === 'captain PC' ? newRound.buildBoardPC() : newRound.buildPlayerboardTest();
-            playerGameBoard = newRound.renderPlayerBoard();
-            
-                
-        playerGameBoard.forEach((row,rowIndex) => {
-    
-            const rowDiv = document.createElement('div');
-            rowDiv.className = "x";
-            rowDiv.id = "x" + rowIndex;
-    
-            row.forEach((cell, cellIndex) => {
-            
-            const cellDiv = document.createElement('div');
-            cellDiv.className = "y";
-            cellDiv.id = "y" + cellIndex;
-            if (cell !== null) {
-                cellDiv.classList.add("ship");
-            };
-            rowDiv.appendChild(cellDiv);
-    
-           });
-          
-           if (newPlayer.name === 'captain PC') {
-            enemygameBoardDiv.appendChild(rowDiv);
-            } else {
-            playergameBoardDiv.appendChild(rowDiv);
-            }
-            
-        });
+        const newGameLoop = new GameLoop(newPlayer,PC)
+        newGameLoop.buildPlayerboard();
+        newGameLoop.buildBoardPC()
         
-        console.log(playerGameBoard);
-        };
-        
-
+       
     });
 });
 
