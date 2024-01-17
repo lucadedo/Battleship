@@ -38,15 +38,17 @@ startButton.addEventListener('click',() =>{
 
         popUpdiv.remove();
         const newGameLoop = new GameLoop(newPlayer,PC)
-        newGameLoop.buildBoardPC();
-        newGameLoop.buildPlayerboard();
+        if(newGameLoop.shipsDeploy()){
+            newGameLoop.buildBoardPC();
+        };
         
-        gameBoardSection.style.gridTemplateRows = '8fr';
-        const PrintOutPlace = document.getElementById('start-up-bar');
-        const PrintOutText = document.createElement('p');
-        PrintOutText.setAttribute('id','print-out-text')
-        PrintOutText.innerText = `It's your turn! Captain ${newPlayer.name}.`;
-        PrintOutPlace.appendChild(PrintOutText);
+
+        // gameBoardSection.style.gridTemplateRows = '8fr';
+        // const PrintOutPlace = document.getElementById('start-up-bar');
+        // const PrintOutText = document.createElement('p');
+        // PrintOutText.setAttribute('id','print-out-text')
+        // PrintOutText.innerText = `It's your turn! Captain ${newPlayer.name}.`;
+        // PrintOutPlace.appendChild(PrintOutText);
 
 
         
