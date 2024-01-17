@@ -37,6 +37,10 @@ startButton.addEventListener('click',() =>{
         const PC = new Player('captain PC', false);//create PC 
 
         popUpdiv.remove();
+        const newGameLoop = new GameLoop(newPlayer,PC)
+        newGameLoop.buildBoardPC();
+        newGameLoop.buildPlayerboard();
+        
         gameBoardSection.style.gridTemplateRows = '8fr';
         const PrintOutPlace = document.getElementById('start-up-bar');
         const PrintOutText = document.createElement('p');
@@ -45,9 +49,7 @@ startButton.addEventListener('click',() =>{
         PrintOutPlace.appendChild(PrintOutText);
 
 
-        const newGameLoop = new GameLoop(newPlayer,PC)
-        newGameLoop.buildBoardPC();
-        newGameLoop.buildPlayerboard();
+        
         //newGameLoop.shipsDeploy();
         //newGameLoop.startTurn();
         
