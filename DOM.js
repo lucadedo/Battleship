@@ -46,8 +46,10 @@ startButton.addEventListener('click',() =>{
 
 
         const newGameLoop = new GameLoop(newPlayer,PC)
+        newGameLoop.buildBoardPC();
         newGameLoop.buildPlayerboard();
-        newGameLoop.buildBoardPC()
+        //newGameLoop.shipsDeploy();
+        //newGameLoop.startTurn();
         
        
     });
