@@ -27,28 +27,61 @@ const GameLoop = function(player,PC) {
         console.log('STOP');
     };
 
-    this.shipsDeploy = function (board) {
+    this.shipsDeploy = function () {
 
+        var playerGameBoard = new GameBoard();
         let ships = ['Carrier','Battleship','Cruiser','Submarine','Destroyer'];  
-        for (let i = 0; i < ships.length; i++){
-            let isValidInput = false;
-            let shipCoordinates;
-            board.chooseShip(i)
-            // while (!isValidInput) {
-            //     shipCoordinates = prompt(`Place your ${ships[i]} (Enter coordinates in the format x,y)`);
-    
-            //     if (/^\d,\d$/.test(shipCoordinates)) {
-            //         isValidInput = true;
-            //     } else {
-            //         alert('Please enter coordinates in the correct format (e.g., 0,0).');
-            //     };
-            // };
-            //     let [x, y] = shipCoordinates.split(',').map(coord => parseInt(coord));
-            //     board.placeShip(x,y);
-            //     console.log(`Placed ${ships[i]} at coordinates (${x}, ${y})`);
-        };
+
+        const gameBoardSection = document.querySelector('#gameBoard-sec')
+        let boardDeployDiv = document.createElement('div');
+        boardDeployDiv.setAttribute('id','deploy-board');
+        for (var i = 0; i < 10; i++) {
+            var row = document.createElement('div');
+            row.className = 'board-row';
+
+            for (var j = 0; j < 10; j++) {
+                var cell = document.createElement('div');
+                cell.className = 'board-cell';
+                cell.id =  i + '-' + j;
+                cell.addEventListener('click', function() {
+                    let [x, y] = this.id.split('-').map(coord => parseInt(coord));
+                    playerGameBoard.placeShip(x,y);
+                    console.log(`Placed ${ships[0]} at coordinates (${x}, ${y})`);
+                    
+                });
+
+                row.appendChild(cell);
+                };
+               
+                boardDeployDiv.appendChild(row);
+                gameBoardSection.appendChild(boardDeployDiv)
+                
+            };
+      
+          
         
-       
+
+        // for (let i = 0; i < ships.length; i++){
+        //     let isValidInput = false;
+        //     let shipCoordinates;
+            
+        //     while (!isValidInput) {
+        //         shipCoordinates = prompt(`Place your ${ships[i]} (Enter coordinates in the format x,y)`);
+    
+        //         if (/^\d,\d$/.test(shipCoordinates)) {
+        //             isValidInput = true;
+        //         } else {
+        //             alert('Please enter coordinates in the correct format (e.g., 0,0).');
+        //         };
+        //     };
+        //         let [x, y] = shipCoordinates.split(',').map(coord => parseInt(coord));
+        //         playerGameBoard.placeShip(x,y);
+        //         console.log(`Placed ${ships[i]} at coordinates (${x}, ${y})`);
+        // };
+        //this.buildPlayerboard(playerGameBoard)
+        //return true
+
+
         // //horizontal
         // board.chooseShip(0);
         // board.placeShip(0,0);
@@ -66,15 +99,10 @@ const GameLoop = function(player,PC) {
     
     };
 
-
-
-
-    this.buildPlayerboard = function () {
+    this.buildPlayerboard = function (playerGameBoard) {
         
-        var playerGameBoard = new GameBoard();
-        this.shipsDeploy(playerGameBoard);                    
+        //if (!this.shipsDeploy(playerGameBoard)) return false;               
        //playerGameBoard.displayBoard();
-     
        const playergameBoardDiv = document.getElementById("playergameBoard-div");
        const newPlayerGameboard = playerGameBoard.displayBoard();
        newPlayerGameboard.forEach((row,rowIndex) => {
@@ -102,7 +130,6 @@ const GameLoop = function(player,PC) {
         
         });
         console.log('PLAYER BOARD:',newPlayerGameboard);
-        
        
     };
 
@@ -152,6 +179,40 @@ const GameLoop = function(player,PC) {
         });
         console.log('PC BOARD:',newEnemyGameboard);
     };
+
+
+
+
+    this.boardForDeploy = function () {
+        const gameBoardSection = document.querySelector('#gameBoard-sec')
+        let boardDeployDiv = document.createElement('div');
+        boardDeployDiv.setAttribute('id','deploy-board');
+        for (var i = 0; i < 10; i++) {
+            var row = document.createElement('div');
+            row.className = 'board-row';
+
+            for (var j = 0; j < 10; j++) {
+                var cell = document.createElement('div');
+                cell.className = 'board-cell';
+                cell.id =  i + '-' + j;
+                cell.addEventListener('click', function() {
+                    let [x, y] = this.id.split('-').map(coord => parseInt(coord));
+                    
+                });
+
+                row.appendChild(cell);
+                };
+               
+                boardDeployDiv.appendChild(row);
+                gameBoardSection.appendChild(boardDeployDiv)
+                
+            };
+        };
+
+
+ 
+
+
 
 
     this.renderPlayerBoard = function () {
