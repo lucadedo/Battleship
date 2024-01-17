@@ -174,7 +174,7 @@ body {
     max-width: 60em;
     min-height: 30em;
     max-height: 40em;
-    background-color: rgb(32, 127, 235,0.6);
+    /* background-color: rgb(32, 127, 235,0.6); */
 }
 #playergameBoard-div {
     display: flex;
@@ -189,8 +189,44 @@ body {
     max-width: 60em;
     min-height: 30em;
     max-height: 40em;
+    /* background-color: rgb(32, 127, 235,0.6); */
+}
+div#deploy-board {
+    display: flex;
+    justify-self: center;
+    justify-content: center;
+    position: absolute;
+    gap: 5px;
+    padding: 15px;
+    border-radius: 3em;
+    min-width: 20em;
+    max-width: 30em;
+    min-height: 20em;
+    max-height: 30em;
     background-color: rgb(32, 127, 235,0.6);
 }
+.board-row {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   width: 25 px;
+   gap: 5px;
+}
+.board-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: #fff;
+    width: 25px;
+    height: 25px;
+    border-radius: 6px;
+}
+.board-cell:hover{
+    background-color: #9f332b;
+}
+
 
 .x {
    display: flex;
