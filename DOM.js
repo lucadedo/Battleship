@@ -52,19 +52,11 @@ startButton.addEventListener('click',() =>{
             const enemygameBoardDiv = document.getElementById("enemygameBoard-div");
             const playergameBoardDiv = document.getElementById("playergameBoard-div");
 
-
-            if (newPlayer.name === 'captain PC') {//pc board
-                const newRound = new GameLoop(newPlayer);
-                var playerGameBoard = newRound.renderPlayerBoard();
-                newRound.buildBoardPC();
-                
-            }else{
-                const newRound = new GameLoop(newPlayer);//player board
-                var playerGameBoard = newRound.renderPlayerBoard();
-                newRound.buildPlayerboardTest();
-            };
+            const newRound = new GameLoop(newPlayer);
+            var playerGameBoard = newPlayer.name === 'captain PC' ? newRound.buildBoardPC() : newRound.buildPlayerboardTest();
+            playerGameBoard = newRound.renderPlayerBoard();
             
-
+                
         playerGameBoard.forEach((row,rowIndex) => {
     
             const rowDiv = document.createElement('div');
@@ -83,7 +75,11 @@ startButton.addEventListener('click',() =>{
     
            });
           
-           enemygameBoardDiv.appendChild(rowDiv)
+           if (newPlayer.name === 'captain PC') {
+            enemygameBoardDiv.appendChild(rowDiv);
+            } else {
+            playergameBoardDiv.appendChild(rowDiv);
+            }
             
         });
         
