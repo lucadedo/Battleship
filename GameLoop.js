@@ -4,17 +4,12 @@ import { GameBoard } from './gameBoard.js';
 
 
 const GameLoop = function(player,PC) { 
-   
-    
-    const playerGameBoard = new GameBoard();
-    const enemyGameBoard = new GameBoard();
-    console.log(playerGameBoard);
 
     
     this.startTurn = function () {
         while(!enemyGameBoard.allShipSunk() || !playerGameBoard.allShipSunk()){
             if (player.turn) {
-                let att = luca.attack(1,1)
+                let att = player.attack(1,1)
                 enemyGameBoard.receiveAttack(att[0],att[1]);
                 player.switchTurn();
                 PC.switchTurn();
@@ -32,21 +27,27 @@ const GameLoop = function(player,PC) {
         console.log('STOP');
     };
 
+    this.shipsDeploy = function (board) {
+        //horizontal
+        board.chooseShip(0);
+        board.placeShip(0,0);
+        board.chooseShip(1);
+        board.placeShip(2,2);
+        board.chooseShip(2);
+        board.placeShip(7,4);
+        //vertical
+        board.chooseShip(3);
+        board.changeShipDirection()
+        board.placeShip(2,5);
+        board.chooseShip(4);
+        board.placeShip(5,7);
+        console.log(board);
+    };
+
     this.buildPlayerboard = function () {
-       //horizontal
-       playerGameBoard.chooseShip(0);
-       playerGameBoard.placeShip(0,0);
-       playerGameBoard.chooseShip(1);
-       playerGameBoard.placeShip(2,2);
-       playerGameBoard.chooseShip(2);
-       playerGameBoard.placeShip(7,4);
-       //vertical
-       playerGameBoard.chooseShip(3);
-       playerGameBoard.changeShipDirection()
-       playerGameBoard.placeShip(2,5);
-       playerGameBoard.chooseShip(4);
-       playerGameBoard.placeShip(5,7);
-       console.log('PLAYER BOARD:');                         
+        
+        var playerGameBoard = new GameBoard();
+        this.shipsDeploy(playerGameBoard);                    
        //playerGameBoard.displayBoard();
      
        const playergameBoardDiv = document.getElementById("playergameBoard-div");
@@ -62,6 +63,8 @@ const GameLoop = function(player,PC) {
         const cellDiv = document.createElement('div');
         cellDiv.className = "y";
         cellDiv.id = "y" + cellIndex;
+        cellDiv.addEventListener('click',() =>{console.log(rowIndex,cellIndex);})
+
         if (cell !== null) {
             cellDiv.classList.add("ship");
         };
@@ -74,10 +77,13 @@ const GameLoop = function(player,PC) {
         
         });
         console.log('PLAYER BOARD:',newPlayerGameboard);
+        
+       
     };
 
 
     this.buildBoardPC = function () {
+        var enemyGameBoard = new GameBoard();
         //horizontal
         enemyGameBoard.chooseShip(0);
         enemyGameBoard.placeShip(1,1);
@@ -91,7 +97,7 @@ const GameLoop = function(player,PC) {
         enemyGameBoard.placeShip(1,4);
         enemyGameBoard.chooseShip(4);
         enemyGameBoard.placeShip(3,7);
-        
+          
         //playerGameBoard.displayBoard();
 
         const enemygameBoardDiv = document.getElementById("enemygameBoard-div");
@@ -107,6 +113,7 @@ const GameLoop = function(player,PC) {
             const cellDiv = document.createElement('div');
             cellDiv.className = "y";
             cellDiv.id = "y" + cellIndex;
+            cellDiv.addEventListener('click',() =>{console.log(rowIndex,cellIndex);})
             if (cell !== null) {
                 cellDiv.classList.add("ship");
             };
