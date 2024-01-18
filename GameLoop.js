@@ -5,7 +5,9 @@ import { GameBoard } from './gameBoard.js';
 
 const GameLoop = function(player,PC) { 
 
-    
+    var playerGameBoard = new GameBoard();
+    var enemyGameBoard = new GameBoard();
+
     this.startTurn = function () {
         while(!enemyGameBoard.allShipSunk() || !playerGameBoard.allShipSunk()){
             if (player.turn) {
@@ -29,13 +31,22 @@ const GameLoop = function(player,PC) {
 
     this.shipsDeploy = function () {
 
-        var playerGameBoard = new GameBoard();
+        
         let board = playerGameBoard.displayBoard()
         let ships = ['Carrier','Battleship','Cruiser','Submarine','Destroyer'];  
-      
+        let shipFlag = 0;
+        //create deploy board
         const gameBoardSection = document.querySelector('#gameBoard-sec')
         let boardDeployDiv = document.createElement('div');
         boardDeployDiv.setAttribute('id','deploy-board');    
+
+        //print out ships name
+        const PrintOutShipDiv = document.getElementById('start-up-bar');
+        const PrintOutShipName = document.createElement('p');
+        PrintOutShipName.setAttribute('id','print-out-text');
+        PrintOutShipName.innerText = `Place your ${ships[shipFlag]}.`;
+        PrintOutShipDiv.appendChild(PrintOutShipName);
+        
 
         board.forEach((row,rowIndex) => {
                 //console.log(newPlayerGameboard);
@@ -48,22 +59,20 @@ const GameLoop = function(player,PC) {
                 const cellDiv = document.createElement('div');
                 cellDiv.className = "board-cell";
                 cellDiv.id = "board-cell" + cellIndex;
-                cellDiv.addEventListener('click',() =>{
+                
+                cellDiv.addEventListener('click',() => {
+                    shipFlag++;
+                    PrintOutShipName.innerText = `Place your ${ships[shipFlag]}.`;
                     playerGameBoard.placeShip(rowIndex,cellIndex);
                     playerGameBoard.chooseShip();
-                    console.log(board);
-                    console.log(rowIndex,cellIndex);
+                      
                     if (playerGameBoard.allPlaced) {
                         this.buildPlayerboard(playerGameBoard);
                         boardDeployDiv.remove();
                         this.buildBoardPC();
-                        
-                        
+                        PrintOutShipDiv.remove()
                     };
-                    
                 });
-                    
-           
                 rowDiv.appendChild(cellDiv);
         
                });
@@ -111,7 +120,7 @@ const GameLoop = function(player,PC) {
 
 
     this.buildBoardPC = function () {
-        var enemyGameBoard = new GameBoard();
+        
         //horizontal
         
         enemyGameBoard.placeShip(1,1);
