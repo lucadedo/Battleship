@@ -32,7 +32,7 @@ const GameLoop = function(player,PC) {
     this.shipsDeploy = function () {
 
         
-        let board = playerGameBoard.displayBoard()
+        let board = playerGameBoard.displayBoard()// only to render
         let ships = ['Carrier','Battleship','Cruiser','Submarine','Destroyer'];  
         let shipFlag = 0;
         //create deploy board
@@ -46,6 +46,7 @@ const GameLoop = function(player,PC) {
         PrintOutShipName.setAttribute('id','print-out-text');
         PrintOutShipName.innerText = `Place your ${ships[shipFlag]}.`;
         PrintOutShipDiv.appendChild(PrintOutShipName);
+        
 
         // change direction button
         const rotateButton = document.createElement('button');
@@ -53,6 +54,7 @@ const GameLoop = function(player,PC) {
         rotateButton.setAttribute('type','button');
         rotateButton.innerText = 'ROTATE';
         PrintOutShipDiv.appendChild(rotateButton);
+        rotateButton.addEventListener('click',()=>{playerGameBoard.changeShipDirection()})// change ship direction
 
         board.forEach((row,rowIndex) => {
                 //console.log(newPlayerGameboard);
@@ -67,12 +69,15 @@ const GameLoop = function(player,PC) {
                 cellDiv.id = "board-cell" + cellIndex;
                 
                 cellDiv.addEventListener('click',() => {
+                    let currentShip = playerGameBoard.getCurrentShip(shipFlag);//print current ship
+                    console.log(currentShip.length);
                     shipFlag++;
                     PrintOutShipName.innerText = `Place your ${ships[shipFlag]}.`;
                     playerGameBoard.placeShip(rowIndex,cellIndex);
                     playerGameBoard.chooseShip();
+                   
                     
-
+                    
 
                     if (playerGameBoard.allPlaced) {
                         this.buildPlayerboard(playerGameBoard);
