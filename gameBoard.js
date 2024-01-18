@@ -22,43 +22,31 @@ const GameBoard = function() {
         let res = allShips[num]
         return res;
     };
-
+          
     this.chooseShip = function(){
         flag++;
         targetShip = allShips[flag];
-        if (flag === 5) {
-            this.allPlaced = true;
+        if (flag === 5) { 
+            this.allPlaced = true; 
         }
         return targetShip;
-    };
+    };  
     
     this.placeShip = function(x ,y) {
 
-        if (x >= 0 && x < 10 && y >= 0 && y < 10 ) {
+       
             if (shipDirectionHorizontal) { 
-                if (this.checkIfPlaceOutside(x) && this.checkIfShipOnHorizontal(x,y)) { //check if horizontal is placeable && if there is ship around
-                    for (let i = 0; i < targetShip.length; i++){
-                        board[i + x][y] = targetShip; //place horizontal
-                    };
-                }else{
-                    console.log("validate error,cant palce here 2");
-                    
-                };
                 
-            }else if (shipDirectionVertical) {
-                if (this.checkIfPlaceOutside(y) && this.checkIfShipOnVertical(x,y)) {//check if vertical is placeable && if there is ship around
-                    for (let i = 0; i < targetShip.length; i++){
-                        board[x][i + y] = targetShip; //place vertical
-                    };
-            }else{
-                console.log("validate error,cant palce here 2"); 
+                for (let i = 0; i < targetShip.length; i++){
+                    board[i + x][y] = targetShip; //place horizontal
+                }; 
+            }else if(shipDirectionVertical){
+               
+                for (let i = 0; i < targetShip.length; i++){
+                    board[x][i + y] = targetShip; //place vertical
+                };
+           
             };
-            };
-            //console.log(board);
-            
-        }else{
-            throw new Error('cant place here ');
-        };
     };
 
     this.checkIfPlaceOutside = function(xy) { //check x or y ,depends on what it takes ,is the same
