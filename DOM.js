@@ -5,8 +5,8 @@ const startButton = document.querySelector("#start-btn");
 startButton.addEventListener('click',() =>{
     startButton.remove();
     //startButton.setAttribute("hidden",'true');
-    const gameBoardSection = document.querySelector('#gameBoard-sec')
-
+    const gameBoardSection = document.querySelector('#gameBoard-sec');
+    
     const popUpdiv = document.createElement('div');
     const h1YourNameTxt = document.createElement('h1');
     const formName = document.createElement('form');
@@ -35,12 +35,16 @@ startButton.addEventListener('click',() =>{
         
         const newPlayer = new Player(inputName.value,true);// create Player
         const PC = new Player('captain PC', false);//create PC 
-
+       
         popUpdiv.remove();
-        const newGameLoop = new GameLoop(newPlayer,PC)
-        if(newGameLoop.shipsDeploy()){
-            newGameLoop.buildBoardPC();
-        };
+        const newGameLoop = new GameLoop(newPlayer,PC);
+        newGameLoop.shipsDeploy();
+        
+        //newGameLoop.buildBoardPC();
+
+        
+        
+        
         
 
         // gameBoardSection.style.gridTemplateRows = '8fr';
@@ -57,6 +61,10 @@ startButton.addEventListener('click',() =>{
         
        
     });
+
+    
+   
+  
 });
 
 
