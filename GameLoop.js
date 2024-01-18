@@ -30,72 +30,49 @@ const GameLoop = function(player,PC) {
     this.shipsDeploy = function () {
 
         var playerGameBoard = new GameBoard();
+        let board = playerGameBoard.displayBoard()
         let ships = ['Carrier','Battleship','Cruiser','Submarine','Destroyer'];  
-
+      
         const gameBoardSection = document.querySelector('#gameBoard-sec')
         let boardDeployDiv = document.createElement('div');
-        boardDeployDiv.setAttribute('id','deploy-board');
-        for (var i = 0; i < 10; i++) {
-            var row = document.createElement('div');
-            row.className = 'board-row';
+        boardDeployDiv.setAttribute('id','deploy-board');    
 
-            for (var j = 0; j < 10; j++) {
-                var cell = document.createElement('div');
-                cell.className = 'board-cell';
-                cell.id =  i + '-' + j;
-                cell.addEventListener('click', function() {
-                    let [x, y] = this.id.split('-').map(coord => parseInt(coord));
-                    playerGameBoard.placeShip(x,y);
-                    console.log(`Placed ${ships[0]} at coordinates (${x}, ${y})`);
+        board.forEach((row,rowIndex) => {
+                //console.log(newPlayerGameboard);
+                const rowDiv = document.createElement('div');
+                rowDiv.className = "board-row";
+                rowDiv.id = "board-row" + rowIndex;
+        
+                row.forEach((cell, cellIndex) => {
+                
+                const cellDiv = document.createElement('div');
+                cellDiv.className = "board-cell";
+                cellDiv.id = "board-cell" + cellIndex;
+                cellDiv.addEventListener('click',() =>{
+                    playerGameBoard.placeShip(rowIndex,cellIndex);
+                    playerGameBoard.chooseShip();
+                    console.log(board);
+                    console.log(rowIndex,cellIndex);
+                    if (playerGameBoard.allPlaced) {
+                        this.buildPlayerboard(playerGameBoard);
+                        boardDeployDiv.remove();
+                        this.buildBoardPC();
+                        
+                        
+                    };
                     
                 });
-
-                row.appendChild(cell);
-                };
-               
-                boardDeployDiv.appendChild(row);
-                gameBoardSection.appendChild(boardDeployDiv)
-                
-            };
-      
-          
+                    
+           
+                rowDiv.appendChild(cellDiv);
         
-
-        // for (let i = 0; i < ships.length; i++){
-        //     let isValidInput = false;
-        //     let shipCoordinates;
-            
-        //     while (!isValidInput) {
-        //         shipCoordinates = prompt(`Place your ${ships[i]} (Enter coordinates in the format x,y)`);
-    
-        //         if (/^\d,\d$/.test(shipCoordinates)) {
-        //             isValidInput = true;
-        //         } else {
-        //             alert('Please enter coordinates in the correct format (e.g., 0,0).');
-        //         };
-        //     };
-        //         let [x, y] = shipCoordinates.split(',').map(coord => parseInt(coord));
-        //         playerGameBoard.placeShip(x,y);
-        //         console.log(`Placed ${ships[i]} at coordinates (${x}, ${y})`);
-        // };
-        //this.buildPlayerboard(playerGameBoard)
-        //return true
-
-
-        // //horizontal
-        // board.chooseShip(0);
-        // board.placeShip(0,0);
-        // board.chooseShip(1)
-        // board.placeShip(2,2);
-        // board.chooseShip(2);
-        // board.placeShip(7,4);
-        // //vertical
-        // board.chooseShip(3);
-        // board.changeShipDirection()
-        // board.placeShip(2,5);
-        // board.chooseShip(4);
-        // board.placeShip(5,7);
-        // console.log(board);
+               });
+              
+               boardDeployDiv.appendChild(rowDiv);
+               gameBoardSection.appendChild(boardDeployDiv)
+               
+             
+            });
     
     };
 
@@ -116,8 +93,7 @@ const GameLoop = function(player,PC) {
         const cellDiv = document.createElement('div');
         cellDiv.className = "y";
         cellDiv.id = "y" + cellIndex;
-        cellDiv.addEventListener('click',() =>{console.log(rowIndex,cellIndex);})
-
+        
         if (cell !== null) {
             cellDiv.classList.add("ship");
         };
@@ -126,28 +102,28 @@ const GameLoop = function(player,PC) {
        });
       
         playergameBoardDiv.appendChild(rowDiv);
-       
+        playergameBoardDiv.style.backgroundColor = 'rgb(32, 127, 235,0.6)';
         
         });
         console.log('PLAYER BOARD:',newPlayerGameboard);
-       
+        
     };
 
 
     this.buildBoardPC = function () {
         var enemyGameBoard = new GameBoard();
         //horizontal
-        enemyGameBoard.chooseShip(0);
+        
         enemyGameBoard.placeShip(1,1);
-        enemyGameBoard.chooseShip(1);
+        enemyGameBoard.chooseShip();
         enemyGameBoard.placeShip(4,3);
-        enemyGameBoard.chooseShip(2);
+        enemyGameBoard.chooseShip();
         enemyGameBoard.placeShip(6,5);
         //vertical
-        enemyGameBoard.chooseShip(3);
+        enemyGameBoard.chooseShip();
         enemyGameBoard.changeShipDirection()
         enemyGameBoard.placeShip(1,4);
-        enemyGameBoard.chooseShip(4);
+        enemyGameBoard.chooseShip();
         enemyGameBoard.placeShip(3,7);
           
         //playerGameBoard.displayBoard();
@@ -165,7 +141,7 @@ const GameLoop = function(player,PC) {
             const cellDiv = document.createElement('div');
             cellDiv.className = "y";
             cellDiv.id = "y" + cellIndex;
-            cellDiv.addEventListener('click',() =>{console.log(rowIndex,cellIndex);})
+           
             if (cell !== null) {
                 cellDiv.classList.add("ship");
             };
@@ -174,7 +150,7 @@ const GameLoop = function(player,PC) {
            });
           
             enemygameBoardDiv.appendChild(rowDiv);
-         
+            enemygameBoardDiv.style.backgroundColor = 'rgb(32, 127, 235,0.6)';
             
         });
         console.log('PC BOARD:',newEnemyGameboard);
