@@ -18,8 +18,9 @@ const GameBoard = function() {
     let shipDirectionVertical = false;
 
    
-    this.getAllShips = function () {
-        return allShips;
+    this.getCurrentShip = function (num) {
+        let res = allShips[num]
+        return res;
     };
 
     this.chooseShip = function(){
@@ -40,7 +41,8 @@ const GameBoard = function() {
                         board[i + x][y] = targetShip; //place horizontal
                     };
                 }else{
-                    console.log("validate error,cant palce here 2"); 
+                    console.log("validate error,cant palce here 2");
+                    
                 };
                 
             }else if (shipDirectionVertical) {
