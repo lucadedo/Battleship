@@ -101,6 +101,8 @@ body {
     filter: brightness(1.1);
     -webkit-filter: brightness(1.1);
 }
+
+
 /* pop up window */
 #pop-up-name {
     display: flex;
@@ -153,6 +155,29 @@ body {
     filter: brightness(1.1);
     -webkit-filter: brightness(1.1);
 }
+/* deploy stage */
+
+#rotate-btn {
+    justify-self: center;
+    min-width: 10em;
+    max-width: 15em;
+    cursor: pointer;
+    background-color: rgb(213, 36, 36);
+    font-family: 'Lilita One','Roboto',sans-serif;
+    color: #fff;
+    border-radius: 16px;
+    font-size: 20px;
+    box-shadow: 1px 1px 5px 1px black;
+   
+    
+}
+#rotate-btn:hover:not(:disabled) {
+    filter: brightness(1.1);
+    -webkit-filter: brightness(1.1);
+}
+
+
+
 
 /* game Board section */
 #gameBoard-sec {
@@ -198,6 +223,7 @@ div#deploy-board {
     position: absolute;
     gap: 5px;
     padding: 15px;
+    margin-top: 2em;
     border-radius: 3em;
     min-width: 20em;
     max-width: 30em;
