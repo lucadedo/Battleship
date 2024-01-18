@@ -46,7 +46,13 @@ const GameLoop = function(player,PC) {
         PrintOutShipName.setAttribute('id','print-out-text');
         PrintOutShipName.innerText = `Place your ${ships[shipFlag]}.`;
         PrintOutShipDiv.appendChild(PrintOutShipName);
-        
+
+        // change direction button
+        const rotateButton = document.createElement('button');
+        rotateButton.setAttribute('id','rotate-btn');
+        rotateButton.setAttribute('type','button');
+        rotateButton.innerText = 'ROTATE';
+        PrintOutShipDiv.appendChild(rotateButton);
 
         board.forEach((row,rowIndex) => {
                 //console.log(newPlayerGameboard);
@@ -65,7 +71,9 @@ const GameLoop = function(player,PC) {
                     PrintOutShipName.innerText = `Place your ${ships[shipFlag]}.`;
                     playerGameBoard.placeShip(rowIndex,cellIndex);
                     playerGameBoard.chooseShip();
-                      
+                    
+
+
                     if (playerGameBoard.allPlaced) {
                         this.buildPlayerboard(playerGameBoard);
                         boardDeployDiv.remove();
