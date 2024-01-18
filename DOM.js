@@ -32,20 +32,14 @@ startButton.addEventListener('click',() =>{
 
     formName.addEventListener('submit',(e) => {
         e.preventDefault();
-        
+
         const newPlayer = new Player(inputName.value,true);// create Player
-        const PC = new Player('captain PC', false);//create PC 
+        const PC = new Player('captain PC', false); //create PC 
        
         popUpdiv.remove();
         const newGameLoop = new GameLoop(newPlayer,PC);
         newGameLoop.shipsDeploy();
-        
         //newGameLoop.buildBoardPC();
-
-        
-        
-        
-        
 
         // gameBoardSection.style.gridTemplateRows = '8fr';
         // const PrintOutPlace = document.getElementById('start-up-bar');
@@ -54,17 +48,8 @@ startButton.addEventListener('click',() =>{
         // PrintOutText.innerText = `It's your turn! Captain ${newPlayer.name}.`;
         // PrintOutPlace.appendChild(PrintOutText);
 
-
-        
-        //newGameLoop.shipsDeploy();
-        //newGameLoop.startTurn();
-        
-       
     });
 
-    
-   
-  
 });
 
 
