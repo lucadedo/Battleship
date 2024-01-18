@@ -2,17 +2,18 @@ import { Ship } from './ship.js';
 
 
 const GameBoard = function() {
-    
+    this.allPlaced = false;
     const board = new Array(10).fill(null).map(() => Array(10).fill(null));// 2D board
 
-    const carrier5 = new Ship(5, false ,0);
-    const battleship4 = new Ship(4, false ,0);
-    const cruiser3 = new Ship(3, false,0);
-    const submarine3 = new Ship(3, false,0);
-    const destroyer2 = new Ship(2, false,0);
+    const carrier5 = new Ship(5,false,0);
+    const battleship4 = new Ship(4,false,0);
+    const cruiser3 = new Ship(3,false,0);
+    const submarine3 = new Ship(3,false,0);
+    const destroyer2 = new Ship(2,false,0);
     
     let allShips = [carrier5,battleship4,cruiser3,submarine3,destroyer2];
     let targetShip = allShips[0];
+    let flag = 0;
     let shipDirectionHorizontal = true;
     let shipDirectionVertical = false;
 
@@ -21,8 +22,12 @@ const GameBoard = function() {
         return allShips;
     };
 
-    this.chooseShip = function(num){
-        targetShip = allShips[num];
+    this.chooseShip = function(){
+        flag++;
+        targetShip = allShips[flag];
+        if (flag === 5) {
+            this.allPlaced = true;
+        }
         return targetShip;
     };
     
