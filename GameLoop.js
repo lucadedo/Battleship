@@ -33,7 +33,8 @@ const GameLoop = function(player,PC) {
 
         
         let board = playerGameBoard.displayBoard()// only to render
-        let ships = ['Carrier','Battleship','Cruiser','Submarine','Destroyer'];  
+        let ships = ['Carrier','Battleship','Cruiser','Submarine','Destroyer']; 
+        let shipLength = [5,4,3,3,2];
         let shipFlag = 0;
         //create deploy board
         const gameBoardSection = document.querySelector('#gameBoard-sec')
@@ -60,38 +61,65 @@ const GameLoop = function(player,PC) {
                 //console.log(newPlayerGameboard);
                 const rowDiv = document.createElement('div');
                 rowDiv.className = "board-row";
-                rowDiv.id = "board-row" + rowIndex;
+                rowDiv.id = rowIndex;
         
                 row.forEach((cell, cellIndex) => {
                 
                 const cellDiv = document.createElement('div');
                 cellDiv.className = "board-cell";
-                cellDiv.id = "board-cell" + cellIndex;
-                
+                cellDiv.id = rowIndex +'-'+ cellIndex;
+                cellDiv.addEventListener('mouseover', (e) => {
+                    let currentShip = playerGameBoard.getCurrentShip(shipFlag);//print current ship
+                    const hoveredCell = e.target;
+                    const [row, col] = hoveredCell.id.split('-').map(coord => parseInt(coord));
+                    hoveredCell.style.backgroundColor = 'lightblue';
+                    for (let i = Math.max(0, row - 2); i <= Math.min(row + 2, 10 - 1); i++) {
+                        for (let j = Math.max(0, col - 2); j <= Math.min(col + 2, 10 - 1); j++) {
+                            const adjacentCell = document.getElementById(`${i}-${j}`);
+                            if (adjacentCell) {
+                                adjacentCell.style.backgroundColor = 'lightblue';
+                            }
+                        }
+                    };
+                  
+                });
+                cellDiv.addEventListener('mouseout', (e) =>{
+                    const outCell = e.target;
+                    const [row, col] = outCell.id.split('-').map(coord => parseInt(coord));
+                    for (let i = Math.max(0, row - 2); i <= Math.min(row + 2, 10 - 1); i++) {
+                        for (let j = Math.max(0, col - 2); j <= Math.min(col + 2, 10 - 1); j++) {
+                            const adjacentCell = document.getElementById(`${i}-${j}`);
+                            if (adjacentCell) {
+                                adjacentCell.style.backgroundColor = 'white';
+                            }
+                        }
+                    };
+                });
+
+
                 cellDiv.addEventListener('click',() => {
                     console.log(board);
                     console.log(rowIndex,cellIndex);
-                    if (playerGameBoard.shipDirectionHorizontal) {
+                    if (playerGameBoard.shipDirectionHorizontal) {// ship placing validation
                         if (playerGameBoard.checkIfPlaceOutside(rowIndex) && 
                             playerGameBoard.checkIfShipOnHorizontal(rowIndex,cellIndex)
                         ) {
-                            let currentShip = playerGameBoard.getCurrentShip(shipFlag);//print current ship
-                            console.log(currentShip.length);
+                            
                             shipFlag++;
                             PrintOutShipName.innerText = `Place your ${ships[shipFlag]}.`;
                             playerGameBoard.placeShip(rowIndex,cellIndex);
                             playerGameBoard.chooseShip();
                         };
-                    }else if (playerGameBoard.shipDirectionVertical) { //check if horizontal is placeable && if there is ship around
+                    }else if (playerGameBoard.shipDirectionVertical) { //check if vertical is placeable && if there is ship around
                                 if (playerGameBoard.checkIfPlaceOutside(cellIndex) &&
                                 playerGameBoard.checkIfShipOnVertical(rowIndex,cellIndex)) {
-                                    let currentShip = playerGameBoard.getCurrentShip(shipFlag);//print current ship
-                                    console.log(currentShip.length);
+                                    //let currentShip = playerGameBoard.getCurrentShip(shipFlag);//print current ship
+                                    //console.log(currentShip.length);
                                     shipFlag++;
                                     PrintOutShipName.innerText = `Place your ${ships[shipFlag]}.`;
                                     playerGameBoard.placeShip(rowIndex,cellIndex);
                                     playerGameBoard.chooseShip();
-                                }
+                                };
                     
                 }else {
                     alert('cant place here!');
