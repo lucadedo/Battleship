@@ -71,19 +71,30 @@ const GameLoop = function(player,PC) {
                 cellDiv.addEventListener('click',() => {
                     console.log(board);
                     console.log(rowIndex,cellIndex);
-                    if (playerGameBoard.checkIfPlaceOutside(rowIndex) && 
-                        playerGameBoard.checkIfPlaceOutside(cellIndex) &&
-                        playerGameBoard.checkIfShipOnHorizontal(rowIndex,cellIndex) &&
-                        playerGameBoard.checkIfShipOnVertical(rowIndex,cellIndex)) { //check if horizontal is placeable && if there is ship around
-
-                    let currentShip = playerGameBoard.getCurrentShip(shipFlag);//print current ship
-                    console.log(currentShip.length);
-                    shipFlag++;
-                    PrintOutShipName.innerText = `Place your ${ships[shipFlag]}.`;
-                    playerGameBoard.placeShip(rowIndex,cellIndex);
-                    playerGameBoard.chooseShip();
+                    if (playerGameBoard.shipDirectionHorizontal) {
+                        if (playerGameBoard.checkIfPlaceOutside(rowIndex) && 
+                            playerGameBoard.checkIfShipOnHorizontal(rowIndex,cellIndex)
+                        ) {
+                            let currentShip = playerGameBoard.getCurrentShip(shipFlag);//print current ship
+                            console.log(currentShip.length);
+                            shipFlag++;
+                            PrintOutShipName.innerText = `Place your ${ships[shipFlag]}.`;
+                            playerGameBoard.placeShip(rowIndex,cellIndex);
+                            playerGameBoard.chooseShip();
+                        };
+                    }else if (playerGameBoard.shipDirectionVertical) { //check if horizontal is placeable && if there is ship around
+                                if (playerGameBoard.checkIfPlaceOutside(cellIndex) &&
+                                playerGameBoard.checkIfShipOnVertical(rowIndex,cellIndex)) {
+                                    let currentShip = playerGameBoard.getCurrentShip(shipFlag);//print current ship
+                                    console.log(currentShip.length);
+                                    shipFlag++;
+                                    PrintOutShipName.innerText = `Place your ${ships[shipFlag]}.`;
+                                    playerGameBoard.placeShip(rowIndex,cellIndex);
+                                    playerGameBoard.chooseShip();
+                                }
+                    
                 }else {
-                    alert('cant place here!')
+                    alert('cant place here!');
                     
                 };
                 
@@ -121,7 +132,7 @@ const GameLoop = function(player,PC) {
         row.forEach((cell, cellIndex) => {
         
         const cellDiv = document.createElement('div');
-        cellDiv.className = "y";
+        cellDiv.className = "y"; 
         cellDiv.id = "y" + cellIndex;
         
         if (cell !== null) {
