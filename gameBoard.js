@@ -3,6 +3,8 @@ import { Ship } from './ship.js';
 
 const GameBoard = function() {
     this.allPlaced = false;
+    this.shipDirectionHorizontal = true;
+    this.shipDirectionVertical = false;
     const board = new Array(10).fill(null).map(() => Array(10).fill(null));// 2D board
 
     const carrier5 = new Ship(5,false,0);
@@ -14,8 +16,7 @@ const GameBoard = function() {
     let allShips = [carrier5,battleship4,cruiser3,submarine3,destroyer2];
     let targetShip = allShips[0];
     let flag = 0;
-    let shipDirectionHorizontal = true;
-    let shipDirectionVertical = false;
+    
 
    
     this.getCurrentShip = function (num) {
@@ -33,19 +34,14 @@ const GameBoard = function() {
     };  
     
     this.placeShip = function(x ,y) {
-
-       
-            if (shipDirectionHorizontal) { 
-                
+            if (this.shipDirectionHorizontal) { 
                 for (let i = 0; i < targetShip.length; i++){
                     board[i + x][y] = targetShip; //place horizontal
                 }; 
-            }else if(shipDirectionVertical){
-               
+            }else if(this.shipDirectionVertical){
                 for (let i = 0; i < targetShip.length; i++){
                     board[x][i + y] = targetShip; //place vertical
                 };
-           
             };
     };
 
@@ -81,12 +77,12 @@ const GameBoard = function() {
     };
 
     this.changeShipDirection = function(){
-        if (shipDirectionHorizontal === true) {
-            shipDirectionVertical = true;
-            shipDirectionHorizontal = false;
+        if (this.shipDirectionHorizontal === true) {
+            this.shipDirectionVertical = true;
+            this.shipDirectionHorizontal = false;
         }else{
-            shipDirectionHorizontal = true;
-            shipDirectionVertical = false;
+            this.shipDirectionHorizontal = true;
+            this.shipDirectionVertical = false;
         };
     };
 
