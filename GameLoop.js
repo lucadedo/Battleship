@@ -112,11 +112,6 @@ const GameLoop = function(player,PC) {
                          
                             shipFlag++;
                             PrintOutShipName.innerText = `Place your ${ships[shipFlag]}.`;
-                            let currentShip = playerGameBoard.getCurrentShip(shipFlag);
-                            this.diplayShipOnDeploy(e.target,currentShip.length)
-                              
-                           
-                            
                             playerGameBoard.placeShip(rowIndex,cellIndex);
                             playerGameBoard.chooseShip();
                         };
@@ -234,33 +229,6 @@ const GameLoop = function(player,PC) {
         });
         console.log('PC BOARD:',newEnemyGameboard);
     };
-
-
-        this.diplayShipOnDeploy = function (tar,len) { 
-            let clickedCell = document.createElement('div');
-            clickedCell.setAttribute('id','clicked-cell');
-
-
-            console.log(tar);
-            const [row, col] = tar.id.split('-').map(coord => parseInt(coord));
-            console.log([row,col]);
-            for (let i = Math.max(0, row); i <= Math.min(row + len, 10 - 1); i++) {
-              let tg = document.getElementById(`${i}-${col}`);
-               console.log(tg);
-               tg.style.backgroundColor = 'black';
-            }
-                
-        
-
-        };
-
-
-
-
- 
-
-
-
 
     this.renderPlayerBoard = function () {
         return playerGameBoard.displayBoard();
