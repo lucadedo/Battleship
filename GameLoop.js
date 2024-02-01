@@ -58,41 +58,53 @@ const GameLoop = function(player,PC) {
         rotateButton.addEventListener('click',()=>{playerGameBoard.changeShipDirection()})// change ship direction
 
         board.forEach((row,rowIndex) => {
-                //console.log(newPlayerGameboard);
                 const rowDiv = document.createElement('div');
                 rowDiv.className = "board-row";
                 rowDiv.id = rowIndex;
-        
+                
                 row.forEach((cell, cellIndex) => {
                 
                 const cellDiv = document.createElement('div');
                 cellDiv.className = "board-cell";
                 cellDiv.id = rowIndex +'-'+ cellIndex;
+                
                 cellDiv.addEventListener('mouseover', (e) => {
-                    let currentShip = playerGameBoard.getCurrentShip(shipFlag);//print current ship
                     const hoveredCell = e.target;
+                    let currentShip = playerGameBoard.getCurrentShip(shipFlag);
                     const [row, col] = hoveredCell.id.split('-').map(coord => parseInt(coord));
-                    hoveredCell.style.backgroundColor = 'lightblue';
-                    for (let i = Math.max(0, row - 2); i <= Math.min(row + 2, 10 - 1); i++) {
-                        for (let j = Math.max(0, col - 2); j <= Math.min(col + 2, 10 - 1); j++) {
-                            const adjacentCell = document.getElementById(`${i}-${j}`);
-                            if (adjacentCell) {
-                                adjacentCell.style.backgroundColor = 'lightblue';
-                            }
-                        }
-                    };
+                    if (playerGameBoard.shipDirectionHorizontal) {
+                        for (let i = Math.max(0, row); i <= Math.min(row + currentShip.length - 1, 10 - 1); i++) {
+                            const adjacentCell = document.getElementById(`${i}-${col}`);//adjacent horizontal,add background
+                            adjacentCell.style.backgroundColor = 'lightblue';
+                        };
+                    }else{
+                        for (let i = Math.max(0, col); i <= Math.min(col + currentShip.length - 1, 10 - 1); i++) {
+                            const adjacentCell = document.getElementById(`${row}-${i}`);//adjacent vertical,add background
+                            adjacentCell.style.backgroundColor = 'lightblue';
+                        };
+                    }
+                    
+                   
                   
                 });
                 cellDiv.addEventListener('mouseout', (e) =>{
                     const outCell = e.target;
+                    let currentShip = playerGameBoard.getCurrentShip(shipFlag);
                     const [row, col] = outCell.id.split('-').map(coord => parseInt(coord));
-                    for (let i = Math.max(0, row - 2); i <= Math.min(row + 2, 10 - 1); i++) {
-                        for (let j = Math.max(0, col - 2); j <= Math.min(col + 2, 10 - 1); j++) {
-                            const adjacentCell = document.getElementById(`${i}-${j}`);
-                            if (adjacentCell) {
-                                adjacentCell.style.backgroundColor = 'white';
-                            }
-                        }
+                    if (playerGameBoard.shipDirectionHorizontal) {
+                        for (let i = Math.max(0, row); i <= Math.min(row + currentShip.length, 10 - 1); i++) {
+                            const adjacentCell = document.getElementById(`${i}-${col}`);//adjacent horizontal,remove background
+                                if (adjacentCell) {
+                                    adjacentCell.style.backgroundColor = 'white';
+                                };
+                            };
+                    }else{
+                        for (let i = Math.max(0, col); i <= Math.min(col + currentShip.length, 10 - 1); i++) {
+                            const adjacentCell = document.getElementById(`${row}-${i}`);//adjacent vertical,remove background
+                                if (adjacentCell) {
+                                    adjacentCell.style.backgroundColor = 'white';
+                                };
+                            };
                     };
                 });
 
