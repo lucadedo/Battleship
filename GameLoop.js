@@ -34,7 +34,6 @@ const GameLoop = function(player,PC) {
         
         let board = playerGameBoard.displayBoard()// only to render
         let ships = ['Carrier','Battleship','Cruiser','Submarine','Destroyer']; 
-        let shipLength = [5,4,3,3,2];
         let shipFlag = 0;
         //create deploy board
         const gameBoardSection = document.querySelector('#gameBoard-sec')
@@ -82,9 +81,7 @@ const GameLoop = function(player,PC) {
                             const adjacentCell = document.getElementById(`${row}-${i}`);//adjacent vertical,add background
                             adjacentCell.style.backgroundColor = 'lightblue';
                         };
-                    }
-                    
-                   
+                    };
                   
                 });
                 cellDiv.addEventListener('mouseout', (e) =>{
@@ -94,31 +91,32 @@ const GameLoop = function(player,PC) {
                     if (playerGameBoard.shipDirectionHorizontal) {
                         for (let i = Math.max(0, row); i <= Math.min(row + currentShip.length, 10 - 1); i++) {
                             const adjacentCell = document.getElementById(`${i}-${col}`);//adjacent horizontal,remove background
-                                if (adjacentCell) {
-                                    adjacentCell.style.backgroundColor = 'white';
-                                };
+                            adjacentCell.style.backgroundColor = 'white';
                             };
                     }else{
                         for (let i = Math.max(0, col); i <= Math.min(col + currentShip.length, 10 - 1); i++) {
                             const adjacentCell = document.getElementById(`${row}-${i}`);//adjacent vertical,remove background
-                                if (adjacentCell) {
-                                    adjacentCell.style.backgroundColor = 'white';
-                                };
-                            };
+                            adjacentCell.style.backgroundColor = 'white';
+                        };
                     };
                 });
 
 
-                cellDiv.addEventListener('click',() => {
+                cellDiv.addEventListener('click',(e) => {
                     console.log(board);
                     console.log(rowIndex,cellIndex);
                     if (playerGameBoard.shipDirectionHorizontal) {// ship placing validation
                         if (playerGameBoard.checkIfPlaceOutside(rowIndex) && 
                             playerGameBoard.checkIfShipOnHorizontal(rowIndex,cellIndex)
                         ) {
-                            
+                         
                             shipFlag++;
                             PrintOutShipName.innerText = `Place your ${ships[shipFlag]}.`;
+                            let currentShip = playerGameBoard.getCurrentShip(shipFlag);
+                            this.diplayShipOnDeploy(e.target,currentShip.length)
+                              
+                           
+                            
                             playerGameBoard.placeShip(rowIndex,cellIndex);
                             playerGameBoard.chooseShip();
                         };
@@ -238,33 +236,25 @@ const GameLoop = function(player,PC) {
     };
 
 
+        this.diplayShipOnDeploy = function (tar,len) { 
+            let clickedCell = document.createElement('div');
+            clickedCell.setAttribute('id','clicked-cell');
 
 
-    this.boardForDeploy = function () {
-        const gameBoardSection = document.querySelector('#gameBoard-sec')
-        let boardDeployDiv = document.createElement('div');
-        boardDeployDiv.setAttribute('id','deploy-board');
-        for (var i = 0; i < 10; i++) {
-            var row = document.createElement('div');
-            row.className = 'board-row';
-
-            for (var j = 0; j < 10; j++) {
-                var cell = document.createElement('div');
-                cell.className = 'board-cell';
-                cell.id =  i + '-' + j;
-                cell.addEventListener('click', function() {
-                    let [x, y] = this.id.split('-').map(coord => parseInt(coord));
-                    
-                });
-
-                row.appendChild(cell);
-                };
-               
-                boardDeployDiv.appendChild(row);
-                gameBoardSection.appendChild(boardDeployDiv)
+            console.log(tar);
+            const [row, col] = tar.id.split('-').map(coord => parseInt(coord));
+            console.log([row,col]);
+            for (let i = Math.max(0, row); i <= Math.min(row + len, 10 - 1); i++) {
+              let tg = document.getElementById(`${i}-${col}`);
+               console.log(tg);
+               tg.style.backgroundColor = 'black';
+            }
                 
-            };
+        
+
         };
+
+
 
 
  
