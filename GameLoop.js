@@ -135,7 +135,8 @@ const GameLoop = function(player,PC) {
                         this.buildPlayerboard(playerGameBoard);
                         boardDeployDiv.remove();
                         this.buildBoardPC();
-                        PrintOutShipDiv.remove()
+                        PrintOutShipDiv.remove();
+                        this.startTurn()
                     };
                 });
                 rowDiv.appendChild(cellDiv);
@@ -216,9 +217,9 @@ const GameLoop = function(player,PC) {
             cellDiv.className = "y";
             cellDiv.id = "y" + cellIndex;
            
-            if (cell !== null) {
-                cellDiv.classList.add("ship");
-            };
+            // if (cell !== null) {
+            //     cellDiv.classList.add("ship");
+            // };
             rowDiv.appendChild(cellDiv);
     
            });
