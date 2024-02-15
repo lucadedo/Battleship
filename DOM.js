@@ -20,7 +20,7 @@ startButton.addEventListener('click',() =>{
     inputName.setAttribute('type','text');
     inputName.setAttribute('placeholder','your name');
     letsgoButton.setAttribute('id','submit-name-btn');
-    letsgoButton.setAttribute('type','submit')
+    letsgoButton.setAttribute('type','submit');
     h1YourNameTxt.innerText ='Your name,Captain.';
     letsgoButton.innerText = `Let's go`;
     
