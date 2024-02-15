@@ -9,23 +9,44 @@ const GameLoop = function(player,PC) {
     var enemyGameBoard = new GameBoard();
 
     this.startTurn = function () {
-        while(!enemyGameBoard.allShipSunk() || !playerGameBoard.allShipSunk()){
+        const enemyBoard = document.querySelector('#enemygameBoard-div');
+        const enemyBoardRow = enemyBoard.querySelectorAll('.x');
+
+        // while(!enemyGameBoard.allShipSunk() || !playerGameBoard.allShipSunk()){
             if (player.turn) {
-                let att = player.attack(1,1)
-                enemyGameBoard.receiveAttack(att[0],att[1]);
-                player.switchTurn();
-                PC.switchTurn();
-                console.log('LUCA ATTACKED');
+                
+                enemyBoardRow.forEach((row) => {
+                   const enCell = row.querySelectorAll('.y');
+                   enCell.forEach((cell) => {
+                        cell.addEventListener('click',(e) => {
+                            e.preventDefault();
+                            console.log(e.target.id);
+                            const [row, col] = e.target.id.split('-').map(coord => parseInt(coord));
+                            // player.attack(row,col)
+                            enemyGameBoard.receiveAttack(row, col);
+                            player.switchTurn();
+                            PC.switchTurn();
+                            this.startTurn();
+                        });
+                      
+                    });
+                });
+
+         
+              
             }else if (PC.turn) {
-                let att2 = PC.attack(2,3)
-                playerGameBoard.receiveAttack(att2[0],att2[1]);
+                let point1 = Math.floor(Math.random() * 10);//random number generetor
+                let point2 = Math.floor(Math.random() * 10);
+                // let att2 = PC.attack(point1, point2);
+                playerGameBoard.receiveAttack(point1,point2);
                 PC.switchTurn();
                 player.switchTurn();
-                console.log('PC ATTACKED');
+                console.log('PC ATTACKED',point1+'-'+point2);
+                
             }else{
                 throw new Error('something went wrong')
-            };
-        }; 
+            
+            }
         console.log('STOP');
     };
 
@@ -209,13 +230,13 @@ const GameLoop = function(player,PC) {
             //console.log(newEnemyGameboard);
             const rowDiv = document.createElement('div');
             rowDiv.className = "x";
-            rowDiv.id = "x" + rowIndex;
+            rowDiv.id = rowIndex;
     
             row.forEach((cell, cellIndex) => {
             
             const cellDiv = document.createElement('div');
             cellDiv.className = "y";
-            cellDiv.id = "y" + cellIndex;
+            cellDiv.id =  rowDiv.id + '-' +cellIndex;
            
             // if (cell !== null) {
             //     cellDiv.classList.add("ship");
