@@ -91,7 +91,6 @@ const GameBoard = function() {
         if (board[x][y] !== null && board[x][y].hasOwnProperty('hits')) {
             board[x][y].hit();
             console.log(`hit! at (${x},${y})`);
-            
             this.allShipSunk(); //check if all ships sunk
         }else if(board[x][y] === null){
             let missed = {missedX:x,missedY:y};
