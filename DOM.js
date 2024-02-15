@@ -39,8 +39,7 @@ startButton.addEventListener('click',() =>{
         popUpdiv.remove();
         const newGameLoop = new GameLoop(newPlayer,PC);
         newGameLoop.shipsDeploy();
-        //newGameLoop.buildBoardPC();
-
+       
         // gameBoardSection.style.gridTemplateRows = '8fr';
         // const PrintOutPlace = document.getElementById('start-up-bar');
         // const PrintOutText = document.createElement('p');
@@ -49,7 +48,8 @@ startButton.addEventListener('click',() =>{
         // PrintOutPlace.appendChild(PrintOutText);
 
     });
-
+    
+    
 });
 
 
