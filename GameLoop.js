@@ -1,4 +1,5 @@
 import { GameBoard } from './gameBoard.js';
+import { Ship } from './ship.js';
 //import { Player } from './Player.js';
 
 
@@ -9,12 +10,13 @@ const GameLoop = function(player,PC) {
     var enemyGameBoard = new GameBoard();
 
     this.startTurn = function () {
+        
         const enemyBoard = document.querySelector('#enemygameBoard-div');
         const enemyBoardRow = enemyBoard.querySelectorAll('.x');
 
         // while(!enemyGameBoard.allShipSunk() || !playerGameBoard.allShipSunk()){
             if (player.turn) {
-                
+              
                 enemyBoardRow.forEach((row) => {
                    const enCell = row.querySelectorAll('.y');
                    enCell.forEach((cell) => {
@@ -24,11 +26,19 @@ const GameLoop = function(player,PC) {
                             const [row, col] = e.target.id.split('-').map(coord => parseInt(coord));
                             // player.attack(row,col)
                             enemyGameBoard.receiveAttack(row, col);
+
+                            let boardForStyle = enemyGameBoard.displayBoard();
+                            console.log(boardForStyle[row][col]);
+                            if (boardForStyle[row][col] = {missedX:row,missedY:col} && !boardForStyle[row][col].hasOwnProperty('hits')) {
+                                e.target.id = 'missed';
+                            }else if(boardForStyle[row][col] = Ship){
+                                e.target.id = 'hitted';
+                            };
+
                             player.switchTurn();
                             PC.switchTurn();
                             this.startTurn();
                         });
-                      
                     });
                 });
 
@@ -52,7 +62,6 @@ const GameLoop = function(player,PC) {
 
     this.shipsDeploy = function () {
 
-        
         let board = playerGameBoard.displayBoard()// only to render
         let ships = ['Carrier','Battleship','Cruiser','Submarine','Destroyer']; 
         let shipFlag = 0;
@@ -159,9 +168,14 @@ const GameLoop = function(player,PC) {
                         PrintOutShipDiv.remove();
                         this.startTurn()
                     };
+
+                
+                
+                
+                    
                 });
                 rowDiv.appendChild(cellDiv);
-        
+                    
                });
               
                boardDeployDiv.appendChild(rowDiv);
@@ -169,7 +183,8 @@ const GameLoop = function(player,PC) {
                
              
             });
-    
+            
+            
     };
 
     this.buildPlayerboard = function (playerGameBoard) {
@@ -236,7 +251,7 @@ const GameLoop = function(player,PC) {
             
             const cellDiv = document.createElement('div');
             cellDiv.className = "y";
-            cellDiv.id =  rowDiv.id + '-' +cellIndex;
+            cellDiv.id =  rowDiv.id + '-' + cellIndex;
            
             // if (cell !== null) {
             //     cellDiv.classList.add("ship");
@@ -249,7 +264,9 @@ const GameLoop = function(player,PC) {
             enemygameBoardDiv.style.backgroundColor = 'rgb(32, 127, 235,0.6)';
             
         });
+        
         console.log('PC BOARD:',newEnemyGameboard);
+        
     };
 
     this.renderPlayerBoard = function () {
