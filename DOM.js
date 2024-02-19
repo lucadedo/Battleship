@@ -29,28 +29,31 @@ startButton.addEventListener('click',() =>{
     formName.appendChild(letsgoButton);
     popUpdiv.appendChild(formName);
     gameBoardSection.appendChild(popUpdiv);// append to gameBoard section
-
-    formName.addEventListener('submit',(e) => {
+    
+    formName.addEventListener('submit', (e) => {
         e.preventDefault();
-
-        const newPlayer = new Player(inputName.value,true);// create Player
-        const PC = new Player('captain PC', false); //create PC 
-       
+        let newPlayer = new Player(inputName.value,true);// create Player
         popUpdiv.remove();
-        const newGameLoop = new GameLoop(newPlayer,PC);
-        newGameLoop.shipsDeploy();
-       
-        // gameBoardSection.style.gridTemplateRows = '8fr';
-        // const PrintOutPlace = document.getElementById('start-up-bar');
-        // const PrintOutText = document.createElement('p');
-        // PrintOutText.setAttribute('id','print-out-text')
-        // PrintOutText.innerText = `It's your turn! Captain ${newPlayer.name}.`;
-        // PrintOutPlace.appendChild(PrintOutText);
-
+        startGame(newPlayer);
     });
+ 
     
     
 });
+
+function startGame(player) {
+
+    const PC = new Player('captain PC', false); //create PC 
+    const newGameLoop = new GameLoop(player,PC);
+   
+
+    newGameLoop.shipsDeploy();
+    
+
+    
+   
+}
+
 
 
 
@@ -63,4 +66,9 @@ startButton.addEventListener('click',() =>{
 
 
    
-
+  // gameBoardSection.style.gridTemplateRows = '8fr';
+        // const PrintOutPlace = document.getElementById('start-up-bar');
+        // const PrintOutText = document.createElement('p');
+        // PrintOutText.setAttribute('id','print-out-text')
+        // PrintOutText.innerText = `It's your turn! Captain ${newPlayer.name}.`;
+        // PrintOutPlace.appendChild(PrintOutText);
