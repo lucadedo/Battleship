@@ -285,7 +285,12 @@ div#deploy-board {
     font-size: 3em;
     
 }
-
+#missed {
+    background-color: #03a9f4;
+}
+#hitted {
+    background-color: #9f332b;
+}
 /* #clicked-cell{
     background-color: #000000;
     width: 25px;
