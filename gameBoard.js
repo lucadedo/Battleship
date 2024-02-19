@@ -89,7 +89,9 @@ const GameBoard = function() {
 
     this.receiveAttack = function(x,y) {
         if (board[x][y] !== null && board[x][y].hasOwnProperty('hits')) {
+            let hitted = {hitted:x,hitted:y};
             board[x][y].hit();
+            
             console.log(`hit! at (${x},${y})`);
             this.allShipSunk(); //check if all ships sunk
         }else if(board[x][y] === null){
