@@ -48,7 +48,30 @@ const GameLoop = function(player,PC) {
                 let point1 = Math.floor(Math.random() * 10);//random number generetor
                 let point2 = Math.floor(Math.random() * 10);
                 // let att2 = PC.attack(point1, point2);
+
                 playerGameBoard.receiveAttack(point1,point2);
+                let boardForStyle2 = playerGameBoard.displayBoard();
+
+                console.log(boardForStyle2[point1][point2]);
+
+                let attckedPoint1 = 'x' + point1;//x0
+                let attckedPoint2 = 'y' + point2;//y0
+                console.log(attckedPoint1,attckedPoint2);//x0 y0
+
+                if (boardForStyle2[point1][point2] = {missedX:point1,missedY:point2} && !boardForStyle2[point1][point2].hasOwnProperty('hits')) {
+                    let rowMissedX = document.querySelector(`#${attckedPoint1}`);
+                    let cellMissedY = rowMissedX.querySelector(`#${attckedPoint2}`);
+                    cellMissedY.id = 'missed';
+                    
+                    
+
+                }else if(boardForStyle2[point1][point2] = Ship){
+                    let rowHittedX = document.querySelector(`#${attckedPoint1}`);
+                    let cellHittedY = rowHittedX.querySelector(`#${attckedPoint2}`);
+                    cellHittedY.id = 'hitted';
+                    
+                };    
+
                 PC.switchTurn();
                 player.switchTurn();
                 console.log('PC ATTACKED',point1+'-'+point2);
