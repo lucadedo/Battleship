@@ -9,14 +9,20 @@ const GameLoop = function(player,PC) {
     var playerGameBoard = new GameBoard();
     var enemyGameBoard = new GameBoard();
 
+    const PrintOutPlace = document.getElementById('gameBoard-sec');
+    var PrintOutText = document.createElement('div');
+    PrintOutText.setAttribute('id','print-out-text2');
+    PrintOutPlace.appendChild(PrintOutText);
+
+    
     this.startTurn = function () {
         
         const enemyBoard = document.querySelector('#enemygameBoard-div');
         const enemyBoardRow = enemyBoard.querySelectorAll('.x');
 
-        // while(!enemyGameBoard.allShipSunk() || !playerGameBoard.allShipSunk()){
             if (player.turn) {
-              
+
+                PrintOutText.innerText = `It's your turn! Captain ${player.name}. ATTACK!`;
                 enemyBoardRow.forEach((row) => {
                    const enCell = row.querySelectorAll('.y');
                    enCell.forEach((cell) => {
@@ -31,10 +37,14 @@ const GameLoop = function(player,PC) {
                             console.log(boardForStyle[row][col]);
                             if (boardForStyle[row][col] = {missedX:row,missedY:col} && !boardForStyle[row][col].hasOwnProperty('hits')) {
                                 e.target.id = 'missed';
+                                PrintOutText.innerText = `You missed!     at ${row} - ${col}`;
+                                
                             }else if(boardForStyle[row][col] = Ship){
                                 e.target.id = 'hitted';
+                                PrintOutText.innerText =`HITTED !!!  at ${row} - ${col}`;
+                                
                             };
-
+                            
                             player.switchTurn();
                             PC.switchTurn();
                             this.startTurn();
@@ -45,6 +55,7 @@ const GameLoop = function(player,PC) {
          
               
             }else if (PC.turn) {
+
                 let point1 = Math.floor(Math.random() * 10);//random number generetor
                 let point2 = Math.floor(Math.random() * 10);
                 // let att2 = PC.attack(point1, point2);
