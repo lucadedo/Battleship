@@ -283,8 +283,14 @@ div#deploy-board {
 
 #print-out-text  {
     font-size: 3em;
-    
 }
+
+#print-out-text2 {
+    font-size: 4em;
+    grid-column: 2 / 4;
+}
+
+
 #missed {
     background-color: #03a9f4;
 }
