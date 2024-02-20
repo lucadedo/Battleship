@@ -336,6 +336,7 @@ const GameLoop = function(player,PC) {
         }else{
             winnerTextPopUp.innerText = 'YOU ARE THE LOSER!';
             gameOverPopUp.appendChild(winnerTextPopUp);
+            gameOverPopUp.appendChild(restartButton);
             PrintOutPlace.appendChild(gameOverPopUp);
         }
         
