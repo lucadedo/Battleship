@@ -42,7 +42,10 @@ const GameLoop = function(player,PC) {
                             }else if(boardForStyle[row][col] = Ship){
                                 e.target.id = 'hitted';
                                 PrintOutText.innerText =`HITTED !!!  at ${row} - ${col}`;
-                                
+                                if(enemyGameBoard.allShipSunk()){
+                                    let playerWon = true;
+                                    this.gameOver(playerWon);
+                                };
                             };
                             
                             player.switchTurn();
@@ -80,7 +83,10 @@ const GameLoop = function(player,PC) {
                     let rowHittedX = document.querySelector(`#${attckedPoint1}`);
                     let cellHittedY = rowHittedX.querySelector(`#${attckedPoint2}`);
                     cellHittedY.id = 'hitted';
-                    
+                    if(playerGameBoard.allShipSunk()){
+                        let playerWon = false;
+                        this.gameOver(playerWon);
+                    };
                 };    
 
                 PC.switchTurn();
@@ -200,7 +206,7 @@ const GameLoop = function(player,PC) {
                         boardDeployDiv.remove();
                         this.buildBoardPC();
                         PrintOutShipDiv.remove();
-                        this.startTurn()
+                        this.startTurn();
                     };
 
                 
@@ -307,7 +313,29 @@ const GameLoop = function(player,PC) {
         return playerGameBoard.displayBoard();
     };
 
-    
+    this.gameOver = function(winnerIsPlayer) {
+
+        
+
+
+        if (winnerIsPlayer) {
+            let gameOverPopUp = document.createElement('div');
+            let winnerTextPopUp = document.createElement('p');
+            gameOverPopUp.setAttribute('id','gameover-pop-up');
+            winnerTextPopUp.setAttribute('id','winner-text-pop-up');
+            gameOverPopUp.innerText = 'GAME OVER';
+            winnerTextPopUp.innerText = 'YOU ARE THE WINNER!';
+            gameOverPopUp.appendChild(winnerTextPopUp);
+            PrintOutPlace.appendChild(gameOverPopUp);
+
+        }else{
+            let gameOverPopUp = document.createElement('div');
+            gameOverPopUp.setAttribute('id','gameover-pop-up');
+            gameOverPopUp.innerText = 'GAME OVER' + ' ' + 'YOU ARE THE LOSER!';
+            PrintOutPlace.appendChild(gameOverPopUp);
+        }
+        
+    };
 
 };
 
