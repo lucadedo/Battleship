@@ -1,6 +1,3 @@
-//const GameBoard = require("./gameBoard");
-
-
 const Player = function(name, turn) {
     this.name = name;
     this.turn = turn;   

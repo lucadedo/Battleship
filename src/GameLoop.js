@@ -1,8 +1,5 @@
 import { GameBoard } from './gameBoard.js';
 import { Ship } from './ship.js';
-//import { Player } from './Player.js';
-
-
 
 const GameLoop = function(player,PC) { 
 
@@ -99,6 +96,7 @@ const GameLoop = function(player,PC) {
             }
         console.log('STOP');
     };
+
 
     this.shipsDeploy = function () {
 
