@@ -45,12 +45,7 @@ function startGame(player) {
 
     const PC = new Player('captain PC', false); //create PC 
     const newGameLoop = new GameLoop(player,PC);
-   
-
     newGameLoop.shipsDeploy();
-    
-
-    
    
 }
 
