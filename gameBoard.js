@@ -110,8 +110,7 @@ const GameBoard = function() {
     this.allShipSunk = function() {
        let allTrue = allShips.every((obj) => obj.sunk === true); 
        if (allTrue) {
-        console.log("game over");
-        return 'game over';
+        return true;
        };
     };  
   
