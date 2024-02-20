@@ -37,7 +37,7 @@ const GameLoop = function(player,PC) {
                             console.log(boardForStyle[row][col]);
                             if (boardForStyle[row][col] = {missedX:row,missedY:col} && !boardForStyle[row][col].hasOwnProperty('hits')) {
                                 e.target.id = 'missed';
-                                PrintOutText.innerText = `You missed!     at ${row} - ${col}`;
+                                PrintOutText.innerText = `You missed!!at ${row} - ${col}`;
                                 
                             }else if(boardForStyle[row][col] = Ship){
                                 e.target.id = 'hitted';
@@ -314,24 +314,28 @@ const GameLoop = function(player,PC) {
     };
 
     this.gameOver = function(winnerIsPlayer) {
+        let gameOverPopUp = document.createElement('div');
+        let winnerTextPopUp = document.createElement('p');
+        const restartButton = document.createElement('button');
+        restartButton.setAttribute('id','restartbtn');
+        restartButton.innerText = 'RESTART'; 
+        gameOverPopUp.setAttribute('id','gameover-pop-up');
+        winnerTextPopUp.setAttribute('id','winner-text-pop-up');
+        gameOverPopUp.innerText = 'GAME OVER';
 
-        
 
+        restartButton.addEventListener('click',() => {window.location.reload()} );
 
         if (winnerIsPlayer) {
-            let gameOverPopUp = document.createElement('div');
-            let winnerTextPopUp = document.createElement('p');
-            gameOverPopUp.setAttribute('id','gameover-pop-up');
-            winnerTextPopUp.setAttribute('id','winner-text-pop-up');
-            gameOverPopUp.innerText = 'GAME OVER';
+            // document.removeEventListener('click', () => {});
             winnerTextPopUp.innerText = 'YOU ARE THE WINNER!';
             gameOverPopUp.appendChild(winnerTextPopUp);
+            gameOverPopUp.appendChild(restartButton);
             PrintOutPlace.appendChild(gameOverPopUp);
 
         }else{
-            let gameOverPopUp = document.createElement('div');
-            gameOverPopUp.setAttribute('id','gameover-pop-up');
-            gameOverPopUp.innerText = 'GAME OVER' + ' ' + 'YOU ARE THE LOSER!';
+            winnerTextPopUp.innerText = 'YOU ARE THE LOSER!';
+            gameOverPopUp.appendChild(winnerTextPopUp);
             PrintOutPlace.appendChild(gameOverPopUp);
         }
         
